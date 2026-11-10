@@ -24,19 +24,20 @@
 :root{
   --void:#FAF9F5;--panel:#F0EEE6;--line:#E4DDCE;--line-hi:#CDBFA6;
   --text:#141413;--muted:#5E5D59;--cyan:#C15F3C;--cyan-dim:rgba(193,95,60,.12);
-  --btn:#C15F3C;--btn-ink:#FFFFFF;
+  --btn:#C15F3C;--btn-ink:#FFFFFF;--ok:#2F8F5B;--green:#4C6B47;--fb:#1877F2;
   --sans:"Noto Sans SC","PingFang SC","Microsoft YaHei",system-ui,sans-serif;
   --serif:"Noto Serif SC","Songti SC","STSong",serif;
   --num:"Space Grotesk","Noto Sans SC",sans-serif;
 }
-.final,footer{--void:#141413;--panel:#1F1E1D;--line:#33312D;--line-hi:#4A4741;--text:#F0EEE6;--muted:#B0AEA5;--cyan:#D97757;--cyan-dim:rgba(217,119,87,.16);--btn:#D97757;--btn-ink:#141413}
+.final,footer,.dark{--void:#141413;--panel:#1F1E1D;--line:#33312D;--line-hi:#4A4741;--text:#F0EEE6;--muted:#B0AEA5;--cyan:#D97757;--cyan-dim:rgba(217,119,87,.16);--btn:#D97757;--btn-ink:#141413;--ok:#6FD1A0}
 *{box-sizing:border-box;margin:0}
 html{scroll-behavior:smooth;scroll-padding-top:72px;overflow-x:clip}
 body{font:400 17px/1.85 var(--sans);color:var(--text);background:var(--void);-webkit-font-smoothing:antialiased}
 a{color:inherit}
+button{font:inherit;color:inherit}
 :focus-visible{outline:2px solid var(--cyan);outline-offset:3px;border-radius:2px}
 .wrap{width:min(1120px,100% - 32px);margin-inline:auto}
-.sec{padding:clamp(64px,9vw,112px) 0}
+.sec{position:relative;padding:clamp(64px,9vw,112px) 0}
 .sec--panel{background:linear-gradient(var(--panel),var(--void))}
 h1,h2,h3{font-weight:900;line-height:1.28}
 h1,h2{font-family:var(--serif);font-weight:700}
@@ -45,72 +46,239 @@ h2{font-size:clamp(28px,4.2vw,46px);max-width:19em;text-wrap:balance}
 .sec-head{margin-bottom:clamp(32px,5vw,56px)}
 .sec-head::before{content:"";display:block;width:56px;height:4px;margin-bottom:22px;background:var(--cyan)}
 
-.btn{display:inline-flex;align-items:center;justify-content:center;min-height:52px;padding:0 28px;border-radius:8px;background:var(--btn);color:var(--btn-ink);font:700 17px/1 var(--sans);text-decoration:none;border:1px solid var(--btn);transition:box-shadow .25s,transform .25s,background .25s}
+/* scroll progress */
+.progress{position:fixed;left:0;top:0;height:3px;width:100%;z-index:50;background:linear-gradient(90deg,var(--cyan),#4C6B47);transform:scaleX(0);transform-origin:0 50%}
+
+/* buttons */
+.btn{display:inline-flex;align-items:center;justify-content:center;min-height:52px;padding:0 28px;border-radius:8px;background:var(--btn);color:var(--btn-ink);font:700 17px/1 var(--sans);text-decoration:none;border:1px solid var(--btn);transition:box-shadow .25s,transform .25s,background .25s;cursor:pointer}
 .btn:hover{box-shadow:0 8px 24px color-mix(in srgb,var(--btn) 40%,transparent);transform:translateY(-1px)}
 .btn--ghost{background:transparent;color:var(--cyan);border-color:var(--cyan)}
 .btn--ghost:hover{background:var(--cyan-dim);box-shadow:none}
+.btn[data-wa]{animation:waPulse 2.6s ease-out infinite}
+.btn[data-wa]:hover{animation:none}
+@keyframes waPulse{0%{box-shadow:0 0 0 0 color-mix(in srgb,var(--btn) 55%,transparent)}70%{box-shadow:0 0 0 14px transparent}100%{box-shadow:0 0 0 0 transparent}}
 
 /* nav */
-.nav{position:sticky;top:0;z-index:20;background:rgba(250,249,245,.9);backdrop-filter:blur(12px);border-bottom:1px solid var(--line)}
+.nav{position:sticky;top:0;z-index:40;background:rgba(250,249,245,.9);backdrop-filter:blur(12px);border-bottom:1px solid var(--line)}
 .nav .wrap{display:flex;align-items:center;justify-content:space-between;min-height:60px;gap:16px}
 .brand{display:flex;align-items:center;gap:10px;font:700 19px/1.2 var(--serif);text-decoration:none;white-space:nowrap}
 .brand i{width:10px;height:10px;background:var(--cyan);transform:rotate(45deg)}
 .nav nav{display:flex;align-items:center;gap:20px;font-size:15px}
 .nav .btn{min-height:40px;padding:0 18px;font-size:15px;white-space:nowrap}
-.fb-link{display:inline-flex;align-items:center;justify-content:center;flex:none;width:36px;height:36px;border-radius:50%;color:#1877F2!important;border:1px solid var(--line-hi);background:var(--panel);transition:transform .2s,background .2s}
+.fb-link{display:inline-flex;align-items:center;justify-content:center;flex:none;width:36px;height:36px;border-radius:50%;color:var(--fb)!important;border:1px solid var(--line-hi);background:var(--panel);transition:transform .2s,background .2s}
 .fb-link:hover{transform:translateY(-1px);background:var(--cyan-dim)}
 .fb-link svg{width:18px;height:18px}
 .cswitch{display:inline-flex;padding:3px;border:1px solid var(--line-hi);border-radius:99px;background:var(--panel);gap:2px}
 .cswitch a{display:inline-flex;align-items:center;min-height:34px;padding:0 14px;border-radius:99px;font:700 14px/1 var(--sans);color:var(--muted);text-decoration:none;white-space:nowrap}
 .cswitch a:hover{color:var(--text)}
 .cswitch a[aria-current="page"]{background:var(--btn);color:var(--btn-ink)}
-@media(max-width:600px){.brand{font-size:15px}.nav .wrap{flex-wrap:wrap;padding:8px 0}.nav nav{width:100%;justify-content:space-between;gap:8px}.cswitch a{padding:0 8px;font-size:12px}.nav .btn{padding:0 10px;font-size:12px}.fb-link{width:32px;height:32px}.nav nav{gap:6px}}
+@media(max-width:600px){.brand{font-size:15px}.nav .wrap{flex-wrap:wrap;padding:8px 0}.nav nav{width:100%;justify-content:space-between;gap:6px}.cswitch a{padding:0 8px;font-size:12px}.nav .btn{padding:0 10px;font-size:12px}.fb-link{width:32px;height:32px}}
 
 /* hero */
-.hero{padding:clamp(48px,7vw,96px) 0 clamp(64px,9vw,112px);background:radial-gradient(60% 55% at 88% 0%,rgba(217,119,87,.18),transparent 70%),radial-gradient(45% 45% at 0% 100%,rgba(76,107,71,.14),transparent 70%),linear-gradient(var(--line) 1px,transparent 1px) 0 0/48px 48px,linear-gradient(90deg,var(--line) 1px,transparent 1px) 0 0/48px 48px,var(--void)}
-.course-name{display:inline-flex;align-items:center;gap:12px;margin-bottom:26px;padding:10px 20px;border-radius:99px;background:var(--cyan-dim);border:1px solid color-mix(in srgb,var(--cyan) 45%,transparent);color:var(--cyan);font:700 clamp(18px,2.2vw,24px)/1.3 var(--serif)}
-.course-name::before{content:"";width:9px;height:9px;background:var(--cyan);transform:rotate(45deg);flex:none}
-.hero h1{font-size:clamp(34px,5.6vw,66px);line-height:1.18;max-width:11em;text-wrap:balance}
-.hero .sub{margin-top:24px;max-width:32em;font-size:19px;color:var(--muted)}
+.hero{position:relative;overflow:hidden;padding:clamp(40px,6vw,84px) 0 clamp(64px,8vw,104px);background:radial-gradient(60% 55% at 88% 0%,rgba(217,119,87,.18),transparent 70%),radial-gradient(45% 45% at 0% 100%,rgba(76,107,71,.14),transparent 70%),linear-gradient(var(--line) 1px,transparent 1px) 0 0/48px 48px,linear-gradient(90deg,var(--line) 1px,transparent 1px) 0 0/48px 48px,var(--void)}
+.hero::after{content:"";position:absolute;inset:auto 0 0 0;height:90px;background:linear-gradient(transparent,var(--void));pointer-events:none}
+.orb{position:absolute;border-radius:50%;filter:blur(40px);opacity:.5;pointer-events:none;animation:drift 14s ease-in-out infinite alternate}
+.orb.a{width:280px;height:280px;left:-80px;top:20%;background:rgba(217,119,87,.28)}
+.orb.b{width:220px;height:220px;right:30%;bottom:-60px;background:rgba(76,107,71,.25);animation-delay:-6s}
+@keyframes drift{to{transform:translate(40px,-30px) scale(1.12)}}
+.hero .wrap{position:relative;z-index:1;display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1.05fr);gap:clamp(28px,5vw,64px);align-items:center}
+.course-name{display:inline-flex;align-items:center;gap:12px;margin-bottom:26px;padding:10px 20px;border-radius:99px;background:var(--cyan-dim);border:1px solid color-mix(in srgb,var(--cyan) 45%,transparent);color:var(--cyan);font:700 clamp(17px,2vw,22px)/1.3 var(--serif)}
+.course-name::before{content:"";width:9px;height:9px;background:var(--cyan);transform:rotate(45deg);flex:none;animation:spin 6s linear infinite}
+@keyframes spin{to{transform:rotate(405deg)}}
+.hero h1{font-size:clamp(32px,4.8vw,58px);line-height:1.2;text-wrap:balance}
+.hero h1 em{font-style:normal;color:var(--cyan);background:linear-gradient(var(--cyan),var(--cyan)) 0 96%/0% 3px no-repeat;animation:underline 1s .6s forwards}
+@keyframes underline{to{background-size:100% 3px}}
+.hero .sub{margin-top:22px;max-width:30em;font-size:18px;color:var(--muted)}
 .hero .sub b{color:var(--text);border-bottom:2px solid var(--cyan)}
-.actions{margin-top:36px;display:flex;flex-wrap:wrap;gap:12px}
-.facts{margin-top:32px;display:flex;flex-wrap:wrap;gap:8px 24px;list-style:none;padding:0;font-size:15px;color:var(--muted)}
+.actions{margin-top:32px;display:flex;flex-wrap:wrap;gap:12px}
+.facts{margin-top:28px;display:flex;flex-wrap:wrap;gap:8px 20px;list-style:none;padding:0;font-size:15px;color:var(--muted)}
 .facts li::before{content:"";display:inline-block;width:7px;height:7px;margin-right:9px;background:var(--cyan);transform:rotate(45deg);vertical-align:1px}
+@media(max-width:900px){.hero .wrap{grid-template-columns:1fr}}
 
-/* cards */
-.grid{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:0 clamp(24px,4vw,56px)}
-.card{position:relative;padding:26px 0 36px}
+/* demo window */
+.demo{position:relative;border:1px solid var(--line-hi);border-radius:14px;background:#fff;box-shadow:0 24px 60px rgba(60,40,20,.22);overflow:hidden}
+.demo-bar{display:flex;align-items:center;gap:6px;padding:10px 14px;background:var(--panel);border-bottom:1px solid var(--line);font-size:12px;color:var(--muted)}
+.demo-bar i{width:9px;height:9px;border-radius:50%;background:var(--line-hi)}
+.demo-bar span{margin-left:auto;display:flex;align-items:center;gap:6px}
+.demo-bar span::before{content:"";width:6px;height:6px;border-radius:50%;background:var(--ok);animation:blink 1.4s steps(2) infinite}
+@keyframes blink{to{opacity:.2}}
+.tabs{display:flex;gap:4px;padding:10px 10px 0;border-bottom:1px solid var(--line);background:var(--void)}
+.tab{position:relative;flex:1;min-height:42px;padding:0 8px;border:0;border-radius:8px 8px 0 0;background:transparent;color:var(--muted);font:700 14px/1.2 var(--sans);cursor:pointer;transition:color .2s,background .2s}
+.tab:hover{color:var(--text)}
+.tab[aria-selected="true"]{color:var(--cyan);background:#fff}
+.tab::after{content:"";position:absolute;left:8px;right:8px;bottom:-1px;height:3px;border-radius:3px;background:var(--cyan);transform:scaleX(0);transform-origin:0 50%}
+.tab[aria-selected="true"]::after{transform:scaleX(1);animation:tabfill var(--dur,7s) linear}
+@keyframes tabfill{from{transform:scaleX(0)}to{transform:scaleX(1)}}
+.stage{position:relative;height:clamp(300px,36vw,340px);padding:18px;color:var(--text)}
+.scene{position:absolute;inset:18px;opacity:0;visibility:hidden;transform:translateY(8px);transition:opacity .35s,transform .35s,visibility .35s}
+.scene.on{opacity:1;visibility:visible;transform:none}
+.cap{margin-top:12px;display:flex;align-items:center;gap:8px;font-size:13.5px;color:var(--muted);min-height:24px}
+.cap b{color:var(--text)}
+.dots{display:inline-flex;gap:3px}
+.dots i{width:5px;height:5px;border-radius:50%;background:var(--cyan);animation:dots 1s infinite}
+.dots i:nth-child(2){animation-delay:.15s}.dots i:nth-child(3){animation-delay:.3s}
+@keyframes dots{0%,60%,100%{transform:none;opacity:.4}30%{transform:translateY(-4px);opacity:1}}
+
+/* scene 1: FB week */
+.wk{display:grid;grid-template-columns:repeat(7,1fr);gap:6px}
+.day{position:relative;border:1px solid var(--line);border-radius:8px;padding:6px 4px 8px;text-align:center;background:var(--void);font-size:12px;color:var(--muted)}
+.day .th{display:block;aspect-ratio:1;margin:4px 0 6px;border-radius:6px;background:var(--g,linear-gradient(135deg,#F2C4AE,#D97757));transform:scale(0);opacity:0;transition:transform .45s cubic-bezier(.2,1.5,.4,1),opacity .3s}
+.day.on .th{transform:none;opacity:1}
+.day .st{display:block;font-size:11px;line-height:1.3;opacity:0;transition:opacity .3s}
+.day.on .st{opacity:1}
+.day.done{border-color:var(--ok);background:rgba(47,143,91,.07)}
+.day.done .st{color:var(--ok);font-weight:700}
+.fbpost{margin-top:12px;display:flex;gap:10px;align-items:center;padding:10px;border:1px solid var(--line);border-radius:10px;background:var(--void);opacity:0;transform:translateY(10px);transition:opacity .4s,transform .4s}
+.fbpost.on{opacity:1;transform:none}
+.fbpost .av{flex:none;width:34px;height:34px;border-radius:50%;background:var(--fb);color:#fff;display:grid;place-items:center;font:700 15px var(--num)}
+.fbpost p{font-size:13px;line-height:1.5;color:var(--text)}
+.fbpost small{display:block;color:var(--muted);font-size:11.5px}
+.fbpost .pub{margin-left:auto;flex:none;padding:3px 10px;border-radius:99px;background:rgba(47,143,91,.12);color:var(--ok);font-size:12px;font-weight:700}
+
+/* scene 2: invoices */
+.inv{display:grid;grid-template-columns:minmax(0,.8fr) minmax(0,1.4fr);gap:14px;align-items:start}
+.stack{position:relative;height:150px}
+.paper{position:absolute;left:0;top:0;width:100%;padding:10px;border:1px solid var(--line-hi);border-radius:8px;background:#fff;box-shadow:0 6px 14px rgba(60,40,20,.12);font-size:11px;color:var(--muted);transition:transform .6s cubic-bezier(.5,0,.2,1),opacity .5s}
+.paper b{display:block;color:var(--text);font-size:12px}
+.paper i{display:block;height:4px;margin-top:6px;border-radius:2px;background:var(--line)}
+.paper:nth-child(1){transform:rotate(-5deg) translate(0,8px)}
+.paper:nth-child(2){transform:rotate(3deg) translate(8px,0)}
+.paper:nth-child(3){transform:rotate(-1deg) translate(4px,-6px)}
+.scene.run .paper{animation:fly 1.6s ease-in-out infinite}
+.scene.run .paper:nth-child(2){animation-delay:.5s}.scene.run .paper:nth-child(3){animation-delay:1s}
+@keyframes fly{0%{opacity:1}60%{transform:translate(120%,20px) rotate(8deg) scale(.7);opacity:0}100%{opacity:0}}
+.sheet{border:1px solid var(--line-hi);border-radius:8px;overflow:hidden;font-size:12px}
+.sheet .hd,.sheet .rw{display:grid;grid-template-columns:.9fr 1.4fr .8fr;gap:6px;padding:6px 10px}
+.sheet .hd{background:#1E7A47;color:#fff;font-weight:700}
+.sheet .rw{border-top:1px solid var(--line);color:var(--text);opacity:0;transform:translateX(-8px);transition:opacity .35s,transform .35s}
+.sheet .rw.on{opacity:1;transform:none;background:linear-gradient(90deg,rgba(47,143,91,.16),transparent);}
+.sheet .rw span:last-child{text-align:right;font-family:var(--num)}
+.meter{margin-top:14px}
+.meter .row{display:flex;justify-content:space-between;align-items:baseline;font-size:13px;color:var(--muted)}
+.meter .row b{font:700 24px var(--num);color:var(--text)}
+.bar{margin-top:6px;height:8px;border-radius:99px;background:var(--line);overflow:hidden}
+.bar i{display:block;height:100%;width:0;border-radius:99px;background:linear-gradient(90deg,var(--cyan),var(--green))}
+@media(max-width:480px){.inv{grid-template-columns:1fr}.stack{display:none}}
+
+/* scene 3: agents */
+.chats{display:grid;gap:8px}
+.chat{display:grid;grid-template-columns:34px 1fr;gap:10px;align-items:center;opacity:0;transform:translateY(8px);transition:opacity .35s,transform .35s}
+.chat.on{opacity:1;transform:none}
+.chat .ic{width:34px;height:34px;border-radius:50%;display:grid;place-items:center;color:#fff;font:700 13px var(--sans);background:var(--c,var(--cyan))}
+.bub{padding:8px 12px;border-radius:12px 12px 12px 3px;background:var(--void);border:1px solid var(--line);font-size:13px;line-height:1.5}
+.bub small{display:block;color:var(--muted);font-size:11.5px}
+.bub .dots{display:none}
+.chat.typing .bub .t{display:none}.chat.typing .bub .dots{display:inline-flex}
+
+/* ticker */
+.ticker{background:#4C6B47;overflow:hidden;white-space:nowrap}
+.ticker-in{display:inline-flex;animation:tick 30s linear infinite}
+.ticker:hover .ticker-in{animation-play-state:paused}
+.ticker span{display:inline-flex;align-items:center;gap:28px;padding:14px 14px 14px 0;font:500 15px var(--num);letter-spacing:.06em;color:#F3F1E8}
+.ticker span::after{content:"";width:7px;height:7px;background:#F2C4AE;transform:rotate(45deg)}
+@keyframes tick{to{transform:translateX(-50%)}}
+
+/* reveal */
+.js .rv{opacity:0;transform:translateY(26px);transition:opacity .7s cubic-bezier(.2,.7,.2,1),transform .7s cubic-bezier(.2,.7,.2,1);transition-delay:var(--d,0s)}
+.js .rv.in{opacity:1;transform:none}
+
+/* topic cards */
+.grid{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:20px}
+.topic{--mx:50%;--my:0%;position:relative;overflow:hidden;display:flex;flex-direction:column;padding:28px 26px 26px;border:1px solid var(--line-hi);border-radius:14px;background:radial-gradient(260px circle at var(--mx) var(--my),var(--cyan-dim),transparent 70%),var(--void);transition:transform .3s,box-shadow .3s,border-color .3s}
+.topic:hover{transform:translateY(-6px);box-shadow:0 18px 40px rgba(60,40,20,.16);border-color:var(--cyan)}
+.topic .big{position:absolute;right:14px;top:-6px;font:700 96px/1 var(--num);color:transparent;-webkit-text-stroke:1.5px var(--line-hi);transition:-webkit-text-stroke-color .3s,transform .4s}
+.topic:hover .big{-webkit-text-stroke-color:var(--cyan);transform:translateY(6px)}
+.ico{position:relative;width:52px;height:52px;border-radius:12px;display:grid;place-items:center;color:var(--cyan);background:var(--cyan-dim);border:1px solid color-mix(in srgb,var(--cyan) 35%,transparent);margin-bottom:18px;transition:transform .4s}
+.topic:hover .ico{transform:rotate(-8deg) scale(1.08)}
+.ico svg{width:26px;height:26px;fill:none;stroke:currentColor;stroke-width:1.7;stroke-linecap:round;stroke-linejoin:round}
+.topic .num{display:block;margin-bottom:8px;font:700 12.5px/1.2 var(--num);letter-spacing:.1em;color:var(--cyan)}
+.topic h3{font-family:var(--serif);font-size:clamp(19px,2vw,22px);margin-bottom:10px}
+.topic p{color:var(--muted);font-size:16px;line-height:1.8}
+.topic .stat{margin-top:16px;display:flex;align-items:baseline;gap:8px;font-size:13.5px;color:var(--muted)}
+.topic .stat b{font:700 34px/1 var(--num);color:var(--cyan)}
+.topic .try{margin-top:auto;padding-top:20px;align-self:flex-start;background:none;border:0;color:var(--cyan);font:700 15px var(--sans);cursor:pointer}
+.topic .try::after{content:" →";display:inline-block;transition:transform .25s}
+.topic .try:hover::after{transform:translateX(5px)}
+@media(max-width:900px){.grid{grid-template-columns:1fr}}
+
+/* flow */
+.flow{position:relative;display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:24px;counter-reset:f}
+.flow::before{content:"";position:absolute;left:8%;right:8%;top:34px;height:2px;background:repeating-linear-gradient(90deg,var(--line-hi) 0 8px,transparent 8px 16px)}
+.flow::after{content:"";position:absolute;left:8%;top:34px;height:2px;width:84%;background:var(--cyan);transform:scaleX(0);transform-origin:0 50%;transition:transform 1.6s .3s cubic-bezier(.5,0,.2,1)}
+.flow.in::after{transform:scaleX(1)}
+.step{position:relative;text-align:center;padding:0 8px}
+.step .ball{position:relative;z-index:1;width:68px;height:68px;margin:0 auto 18px;border-radius:50%;display:grid;place-items:center;background:var(--void);border:2px solid var(--line-hi);color:var(--muted);transition:border-color .4s,color .4s,box-shadow .4s,transform .4s}
+.flow.in .step .ball{border-color:var(--cyan);color:var(--cyan);box-shadow:0 0 0 6px var(--cyan-dim)}
+.flow.in .step:nth-child(1) .ball{transition-delay:.3s}.flow.in .step:nth-child(2) .ball{transition-delay:1s}.flow.in .step:nth-child(3) .ball{transition-delay:1.7s}
+.step:hover .ball{transform:scale(1.1)}
+.step .ball svg{width:28px;height:28px;fill:none;stroke:currentColor;stroke-width:1.7;stroke-linecap:round;stroke-linejoin:round}
+.step h3{font-family:var(--serif);font-size:clamp(19px,2vw,22px)}
+.step p{margin-top:6px;color:var(--muted);font-size:15.5px;max-width:20em;margin-inline:auto}
+@media(max-width:760px){.flow{grid-template-columns:1fr;gap:32px}.flow::before,.flow::after{display:none}}
+
+/* org */
+.org{display:grid;grid-template-columns:minmax(0,1.2fr) minmax(0,.8fr);gap:clamp(24px,5vw,64px);align-items:center}
+.org svg{display:block;width:100%;height:auto;overflow:visible}
+.org .line{fill:none;stroke:var(--line-hi);stroke-width:2}
+.org .flowline{fill:none;stroke:var(--cyan);stroke-width:2;stroke-dasharray:6 8;animation:dash 1.2s linear infinite}
+@keyframes dash{to{stroke-dashoffset:-14}}
+.org .node{cursor:pointer;outline:none}
+.org .node rect{fill:var(--void);stroke:var(--line-hi);stroke-width:2;transition:stroke .25s,fill .25s}
+.org .node text{font:700 20px var(--sans);fill:var(--text);text-anchor:middle;dominant-baseline:central;pointer-events:none}
+.org .node:hover rect,.org .node:focus-visible rect,.org .node.on rect{stroke:var(--cyan);fill:var(--cyan-dim)}
+.org .node.on text{fill:var(--cyan)}
+.org .core circle.r{fill:var(--cyan);opacity:.18;transform-origin:320px 180px;animation:pulse 2.4s ease-out infinite}
+@keyframes pulse{from{transform:scale(.8);opacity:.35}to{transform:scale(1.7);opacity:0}}
+.org .core circle.c{fill:var(--cyan)}
+.org .core text{font:700 20px var(--sans);fill:#fff;text-anchor:middle;dominant-baseline:central}
+.org .dot{fill:var(--green)}
+.report{min-height:220px;padding:24px;border:1px solid var(--line-hi);border-radius:14px;background:var(--panel)}
+.report .who{display:flex;align-items:center;gap:10px;font:700 18px var(--serif)}
+.report .who i{width:10px;height:10px;border-radius:50%;background:var(--ok);animation:blink 1.4s steps(2) infinite}
+.report .msg{margin-top:14px;padding:14px 16px;border-radius:12px 12px 12px 3px;background:var(--void);border:1px solid var(--line);color:var(--text);font-size:16px;line-height:1.7;animation:pop .35s}
+.report small{display:block;margin-top:12px;color:var(--muted);font-size:13px}
+@keyframes pop{from{opacity:0;transform:translateY(8px) scale(.97)}to{opacity:1;transform:none}}
+@media(max-width:860px){.org{grid-template-columns:1fr}}
+
+/* who */
+.who3{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:0 clamp(24px,4vw,56px)}
+.card{position:relative;padding:26px 0 36px;transition:transform .3s}
 .card::before{content:"";position:absolute;left:0;top:0;height:1px;width:100%;background:var(--line-hi)}
-.card::after{content:"";position:absolute;left:0;top:-1px;height:3px;width:56px;background:var(--cyan)}
+.card::after{content:"";position:absolute;left:0;top:-1px;height:3px;width:56px;background:var(--cyan);transition:width .4s}
+.card:hover{transform:translateY(-4px)}
+.card:hover::after{width:100%}
 .card h3{font-family:var(--serif);font-size:clamp(19px,2.1vw,23px);margin-bottom:10px}
 .card p{color:var(--muted);max-width:28em}
-.card .num{display:block;margin-bottom:8px;font:700 14px/1 var(--num);letter-spacing:.1em;color:var(--cyan)}
-@media(max-width:860px){.grid{grid-template-columns:1fr}}
-.two{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:0 clamp(32px,6vw,88px)}
-@media(max-width:760px){.two{grid-template-columns:1fr}}
-
-/* track */
-.track{list-style:none;padding:0;max-width:820px;border-left:2px solid var(--line-hi)}
-.track li{position:relative;padding:0 0 36px 32px}
-.track li:last-child{padding-bottom:0}
-.track li::before{content:attr(data-n);position:absolute;left:-17px;top:0;width:32px;height:32px;border-radius:50%;background:var(--void);border:2px solid var(--cyan);color:var(--cyan);font:700 15px/28px var(--num);text-align:center;box-shadow:0 0 0 4px var(--cyan-dim)}
-.track h3{font-family:var(--serif);font-size:clamp(19px,2.3vw,25px)}
-.track p{margin-top:6px;color:var(--muted);max-width:34em}
+@media(max-width:860px){.who3{grid-template-columns:1fr}}
 
 /* final + footer */
-.final{padding:clamp(72px,10vw,128px) 0;color:var(--text);background:radial-gradient(50% 70% at 80% 100%,rgba(217,119,87,.28),transparent 70%),radial-gradient(45% 60% at 8% 0%,rgba(130,168,115,.22),transparent 70%),var(--void)}
+.final{position:relative;overflow:hidden;padding:clamp(72px,10vw,128px) 0;color:var(--text);background:radial-gradient(50% 70% at 80% 100%,rgba(217,119,87,.28),transparent 70%),radial-gradient(45% 60% at 8% 0%,rgba(130,168,115,.22),transparent 70%),var(--void)}
+.final .wrap{position:relative;z-index:1}
 .final h2{font-size:clamp(30px,5vw,54px);max-width:13em}
 .final p{margin-top:20px;max-width:32em;color:var(--muted);font-size:18px}
+.float{position:absolute;border:2px solid rgba(217,119,87,.35);border-radius:50%;pointer-events:none;animation:drift 10s ease-in-out infinite alternate}
+.float.f1{width:180px;height:180px;right:8%;top:14%}
+.float.f2{width:90px;height:90px;right:22%;bottom:12%;border-radius:18px;animation-delay:-4s;transform:rotate(20deg)}
+.float.f3{width:54px;height:54px;right:4%;bottom:30%;animation-delay:-7s;border-color:rgba(130,168,115,.45)}
 footer{background:#141413;color:#B0AEA5;font-size:14px;padding:0 0 40px}
 footer .wrap{border-top:1px solid #33312D;padding-top:24px}
 .foot{display:flex;flex-wrap:wrap;justify-content:space-between;gap:8px 24px}
 .foot a{text-decoration:underline;text-underline-offset:4px}
 .disclaimer{margin-top:14px;font-size:13px;line-height:1.7;color:#8F8D85}
 footer .disclaimer.wrap{border-top:0;padding-top:0}
-@media(prefers-reduced-motion:reduce){html{scroll-behavior:auto}*{transition:none!important}}
+
+@media(prefers-reduced-motion:reduce){
+  html{scroll-behavior:auto}
+  *,*::before,*::after{animation:none!important;transition:none!important}
+  .js .rv{opacity:1;transform:none}
+  .hero h1 em{background-size:100% 3px}
+  .org .dot{display:none}
+}
 </style>
+<script>document.documentElement.classList.add("js")</script>
 </head>
 <body>
+<div class="progress" id="progress" aria-hidden="true"></div>
 <header class="nav">
   <div class="wrap">
     <a class="brand" href="/"><i></i>Shine On Digital</a>
@@ -124,88 +292,191 @@ footer .disclaimer.wrap{border-top:0;padding-top:0}
 
 <main>
 <section class="hero">
+  <div class="orb a" aria-hidden="true"></div><div class="orb b" aria-hidden="true"></div>
   <div class="wrap">
-    <p class="course-name">AI 自动化 + 小助理课程</p>
-    <h1>让 AI 替你发帖、记单据，再为每个部门配一个小助理。</h1>
-    <p class="sub">学会把每天重复的工作<b>自动化</b>，并为企业的每个部门建立专属的 <b>AI 小助理</b>，自动处理工作、汇报进度。不需要编程基础，中文授课。</p>
-    <div class="actions">
-      <a class="btn" data-wa href="#enroll">WhatsApp 咨询课程</a>
-      <a class="btn btn--ghost" href="#learn">看看学什么</a>
-      <a class="btn btn--ghost" href="/">← Vibe Coding 课程</a>
+    <div>
+      <p class="course-name">AI 自动化 + 小助理课程</p>
+      <h1>让 AI 替你<em>发帖</em>、<em>记单据</em>，再为每个部门配一个小助理。</h1>
+      <p class="sub">学会把每天重复的工作<b>自动化</b>，并为企业的每个部门建立专属的 <b>AI 小助理</b>，自动处理工作、汇报进度。不需要编程基础，中文授课。</p>
+      <div class="actions">
+        <a class="btn" data-wa href="#enroll">WhatsApp 咨询课程</a>
+        <a class="btn btn--ghost" href="#learn">看看学什么</a>
+        <a class="btn btn--ghost" href="/">← Vibe Coding 课程</a>
+      </div>
+      <ul class="facts">
+        <li>FB Post 自动化</li>
+        <li>单据 / Invoice 自动记录</li>
+        <li>Hermes Agent 部门小助理</li>
+      </ul>
     </div>
-    <ul class="facts">
-      <li>FB Post 自动化</li>
-      <li>单据 / Invoice 自动记录</li>
-      <li>Hermes Agent 部门小助理</li>
-    </ul>
+
+    <div class="demo" id="demo" aria-label="自动化示范（示例数据）">
+      <div class="demo-bar"><i></i><i></i><i></i><span>自动化示范 · 示例数据</span></div>
+      <div class="tabs" role="tablist" aria-label="选择示范">
+        <button class="tab" role="tab" aria-selected="true" data-i="0">FB Post</button>
+        <button class="tab" role="tab" aria-selected="false" data-i="1">单据 → Sheet</button>
+        <button class="tab" role="tab" aria-selected="false" data-i="2">部门小助理</button>
+      </div>
+      <div class="stage">
+        <!-- 1 FB -->
+        <div class="scene on" data-s="0">
+          <div class="wk" id="wk">
+            <div class="day" style="--g:linear-gradient(135deg,#F2C4AE,#D97757)"><span>一</span><i class="th"></i><span class="st">已排程</span></div>
+            <div class="day" style="--g:linear-gradient(135deg,#BFD3B5,#4C6B47)"><span>二</span><i class="th"></i><span class="st">已排程</span></div>
+            <div class="day" style="--g:linear-gradient(135deg,#F5DDA8,#E5B567)"><span>三</span><i class="th"></i><span class="st">已排程</span></div>
+            <div class="day" style="--g:linear-gradient(135deg,#C9D6F2,#5B86D6)"><span>四</span><i class="th"></i><span class="st">已排程</span></div>
+            <div class="day" style="--g:linear-gradient(135deg,#F2C4AE,#B5381F)"><span>五</span><i class="th"></i><span class="st">已排程</span></div>
+            <div class="day" style="--g:linear-gradient(135deg,#D9C7EE,#8A63C4)"><span>六</span><i class="th"></i><span class="st">已排程</span></div>
+            <div class="day" style="--g:linear-gradient(135deg,#BFE3DA,#3CA082)"><span>日</span><i class="th"></i><span class="st">已排程</span></div>
+          </div>
+          <div class="fbpost" id="fbpost"><span class="av">f</span><p>本周新品上市，欢迎预约体验！<small>刚刚 · 由 AI 自动发布</small></p><span class="pub">已发布 ✓</span></div>
+          <p class="cap" id="cap0"><span class="dots"><i></i><i></i><i></i></span><span>AI 正在规划本周内容…</span></p>
+        </div>
+        <!-- 2 Invoice -->
+        <div class="scene" data-s="1">
+          <div class="inv">
+            <div class="stack" aria-hidden="true">
+              <div class="paper"><b>Invoice</b>Supplier A<i></i><i></i></div>
+              <div class="paper"><b>Invoice</b>Supplier B<i></i><i></i></div>
+              <div class="paper"><b>Invoice</b>Supplier C<i></i><i></i></div>
+            </div>
+            <div class="sheet" id="sheet">
+              <div class="hd"><span>日期</span><span>供应商</span><span>金额</span></div>
+              <div class="rw"><span>03/11</span><span>Supplier A</span><span>RM 1,280</span></div>
+              <div class="rw"><span>03/11</span><span>Supplier B</span><span>RM 460</span></div>
+              <div class="rw"><span>04/11</span><span>Supplier C</span><span>RM 3,150</span></div>
+              <div class="rw"><span>04/11</span><span>Supplier D</span><span>RM 89</span></div>
+              <div class="rw"><span>05/11</span><span>Supplier E</span><span>RM 720</span></div>
+            </div>
+          </div>
+          <div class="meter">
+            <div class="row"><span>已自动记录到 Google Sheet</span><span><b id="cnt">0</b> / 1000 张</span></div>
+            <div class="bar"><i id="bar"></i></div>
+          </div>
+        </div>
+        <!-- 3 Agents -->
+        <div class="scene" data-s="2">
+          <div class="chats" id="chats">
+            <div class="chat" style="--c:#C15F3C"><span class="ic">销售</span><div class="bub"><span class="t">本周新增客户 12 位，其中 3 位待跟进。<small>销售助理 · 刚刚</small></span><span class="dots"><i></i><i></i><i></i></span></div></div>
+            <div class="chat" style="--c:#4C6B47"><span class="ic">人事</span><div class="bub"><span class="t">本周有 2 份请假申请等待审批。<small>人事助理 · 刚刚</small></span><span class="dots"><i></i><i></i><i></i></span></div></div>
+            <div class="chat" style="--c:#5B86D6"><span class="ic">营销</span><div class="bub"><span class="t">本周 7 篇 Post 已全部发布。<small>营销助理 · 刚刚</small></span><span class="dots"><i></i><i></i><i></i></span></div></div>
+            <div class="chat" style="--c:#B7791F"><span class="ic">行政</span><div class="bub"><span class="t">本月单据已全部记录，无异常。<small>行政助理 · 刚刚</small></span><span class="dots"><i></i><i></i><i></i></span></div></div>
+          </div>
+        </div>
+      </div>
+    </div>
   </div>
 </section>
+
+<div class="ticker" aria-hidden="true">
+  <div class="ticker-in">
+    <span>FB Post 自动化</span><span>自动规划每周内容</span><span>单据 / Invoice 识别</span><span>自动记录 Google Sheet</span><span>Hermes Agent</span><span>部门小助理</span><span>自动汇报进度</span>
+    <span>FB Post 自动化</span><span>自动规划每周内容</span><span>单据 / Invoice 识别</span><span>自动记录 Google Sheet</span><span>Hermes Agent</span><span>部门小助理</span><span>自动汇报进度</span>
+  </div>
+</div>
 
 <section class="sec" id="learn">
   <div class="wrap">
-    <div class="sec-head">
+    <div class="sec-head rv">
       <h2>课程纲要：3 个能马上用在生意上的自动化。</h2>
-      <p class="lede">从发帖、单据到部门汇报，把每天重复的事交给 AI。</p>
+      <p class="lede">从发帖、单据到部门汇报，把每天重复的事交给 AI。点“看示范”，上面的画面会播放对应的自动化。</p>
     </div>
     <div class="grid">
-      <div class="card">
-        <span class="num">01 · FB POST 自动化</span>
+      <article class="topic rv">
+        <span class="big" aria-hidden="true">01</span>
+        <span class="ico"><svg viewBox="0 0 24 24" aria-hidden="true"><rect x="3" y="5" width="18" height="16" rx="2"/><path d="M3 10h18M8 3v4M16 3v4M8 15h3"/></svg></span>
+        <span class="num">FB POST 自动化</span>
         <h3>再也无需每天想要 Post 什么</h3>
         <p>让 AI 帮你规划每个星期要做的 Post 和图片，然后自动发布到你自己的 Facebook 专页。</p>
-      </div>
-      <div class="card">
-        <span class="num">02 · 单据 / INVOICE 自动处理</span>
+        <button class="try" type="button" data-demo="0">看示范</button>
+      </article>
+      <article class="topic rv" style="--d:.12s">
+        <span class="big" aria-hidden="true">02</span>
+        <span class="ico"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 8V5a1 1 0 0 1 1-1h3M16 4h3a1 1 0 0 1 1 1v3M20 16v3a1 1 0 0 1-1 1h-3M8 20H5a1 1 0 0 1-1-1v-3"/><path d="M8 9h8M8 12h8M8 15h5"/></svg></span>
+        <span class="num">单据 / INVOICE 自动处理</span>
         <h3>不管 100 张还是 1000 张，都自动记录</h3>
         <p>自动处理单据或 Invoice，把里面的详细资料记录到 Google Sheet。再也不需要自己手动一笔一笔记录。</p>
-      </div>
-      <div class="card">
-        <span class="num">03 · HERMES AGENT 小助理</span>
+        <div class="stat"><b data-count="1000">0</b><span>张单据，同样自动处理</span></div>
+        <button class="try" type="button" data-demo="1">看示范</button>
+      </article>
+      <article class="topic rv" style="--d:.24s">
+        <span class="big" aria-hidden="true">03</span>
+        <span class="ico"><svg viewBox="0 0 24 24" aria-hidden="true"><rect x="5" y="8" width="14" height="11" rx="3"/><path d="M12 8V4M9 13h.01M15 13h.01M9 16h6M3 13v2M21 13v2"/></svg></span>
+        <span class="num">HERMES AGENT 小助理</span>
         <h3>为每个部门建立自己的助理</h3>
         <p>了解为什么要用 Hermes 来制作企业自己的小助理，并为每个部门建立助理，处理工作，同时报告和汇报各部门的进度。</p>
+        <button class="try" type="button" data-demo="2">看示范</button>
+      </article>
+    </div>
+  </div>
+</section>
+
+<section class="sec sec--panel" id="how">
+  <div class="wrap">
+    <div class="sec-head rv">
+      <h2>设定一次，之后自动跑。</h2>
+      <p class="lede">不管是发帖、单据还是部门汇报，流程都是同样三步。</p>
+    </div>
+    <div class="flow rv" id="flow">
+      <div class="step"><span class="ball"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 20l1-5L16 4l4 4L9 19z"/><path d="m14 6 4 4"/></svg></span><h3>你设定</h3><p>用中文告诉 AI 要做什么、什么时候做。</p></div>
+      <div class="step"><span class="ball"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M13 3 5 13h6l-1 8 8-10h-6z"/></svg></span><h3>AI 自动执行</h3><p>规划内容、读取单据、处理日常工作，不用你动手。</p></div>
+      <div class="step"><span class="ball"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 5h16v11H9l-5 4z"/><path d="M8 9h8M8 12h5"/></svg></span><h3>自动汇报给你</h3><p>结果记录好，进度主动告诉你，不用逐个去追问。</p></div>
+    </div>
+  </div>
+</section>
+
+<section class="sec" id="agents">
+  <div class="wrap">
+    <div class="sec-head rv">
+      <h2>每个部门一个小助理，进度自动汇报。</h2>
+      <p class="lede">点一点各部门，看看小助理会怎样向老板汇报。（示例内容）</p>
+    </div>
+    <div class="org">
+      <div class="rv">
+        <svg viewBox="0 0 640 360" role="img" aria-label="各部门小助理向老板汇报的示意图">
+          <g class="lines">
+            <path class="line" d="M165 70 L320 180"/><path class="line" d="M475 70 L320 180"/><path class="line" d="M165 290 L320 180"/><path class="line" d="M475 290 L320 180"/>
+            <path class="flowline" d="M165 70 L320 180"/><path class="flowline" d="M475 70 L320 180"/><path class="flowline" d="M165 290 L320 180"/><path class="flowline" d="M475 290 L320 180"/>
+          </g>
+          <circle class="dot" r="5"><animateMotion dur="2.6s" repeatCount="indefinite" path="M165 70 L320 180"/></circle>
+          <circle class="dot" r="5"><animateMotion dur="2.6s" begin="-.65s" repeatCount="indefinite" path="M475 70 L320 180"/></circle>
+          <circle class="dot" r="5"><animateMotion dur="2.6s" begin="-1.3s" repeatCount="indefinite" path="M165 290 L320 180"/></circle>
+          <circle class="dot" r="5"><animateMotion dur="2.6s" begin="-1.95s" repeatCount="indefinite" path="M475 290 L320 180"/></circle>
+          <g class="core"><circle class="r" cx="320" cy="180" r="46"/><circle class="c" cx="320" cy="180" r="46"/><text x="320" y="180">老板</text></g>
+          <g class="node on" tabindex="0" role="button" data-d="0"><rect x="70" y="40" width="190" height="60" rx="14"/><text x="165" y="70">销售助理</text></g>
+          <g class="node" tabindex="0" role="button" data-d="1"><rect x="380" y="40" width="190" height="60" rx="14"/><text x="475" y="70">人事助理</text></g>
+          <g class="node" tabindex="0" role="button" data-d="2"><rect x="70" y="260" width="190" height="60" rx="14"/><text x="165" y="290">营销助理</text></g>
+          <g class="node" tabindex="0" role="button" data-d="3"><rect x="380" y="260" width="190" height="60" rx="14"/><text x="475" y="290">行政助理</text></g>
+        </svg>
+      </div>
+      <div class="report rv" style="--d:.15s" aria-live="polite">
+        <div class="who"><i></i><span id="rwho">销售助理</span></div>
+        <div class="msg" id="rmsg">本周新增客户 12 位，其中 3 位待跟进，已整理好名单。</div>
+        <small>示例内容，实际汇报内容按你公司的需要设定。</small>
       </div>
     </div>
   </div>
 </section>
 
-<section class="sec sec--panel" id="why">
+<section class="sec sec--panel" id="who">
   <div class="wrap">
-    <div class="sec-head">
-      <h2>自动化解决“做不完”，小助理解决“要盯进度”。</h2>
-      <p class="lede">两样东西加起来，让你把时间留给真正需要判断和决策的事。</p>
-    </div>
-    <div class="two">
-      <div class="card">
-        <span class="num">自动化</span>
-        <h3>设定一次，之后自动跑</h3>
-        <p>每个星期的 FB Post、堆积如山的单据，这些重复的事，交给 AI 自动完成。</p>
-      </div>
-      <div class="card">
-        <span class="num">AI 小助理</span>
-        <h3>每个部门都有一个助理</h3>
-        <p>部门助理负责处理日常工作，并定期报告进度，老板不用逐个部门追问。</p>
-      </div>
-    </div>
-  </div>
-</section>
-
-<section class="sec" id="who">
-  <div class="wrap">
-    <div class="sec-head">
+    <div class="sec-head rv">
       <h2>适合谁。</h2>
     </div>
-    <div class="grid">
-      <div class="card"><h3>老板与管理层</h3><p>想为各部门建立小助理，随时掌握每个部门的进度和汇报。</p></div>
-      <div class="card"><h3>行政 / 会计 / HR</h3><p>每个月要处理大量单据和 Invoice，想自动记录到 Google Sheet。</p></div>
-      <div class="card"><h3>Marketing</h3><p>不想每天苦思要 Post 什么，想让 AI 规划内容并自动发布到专页。</p></div>
+    <div class="who3">
+      <div class="card rv"><h3>老板与管理层</h3><p>想为各部门建立小助理，随时掌握每个部门的进度和汇报。</p></div>
+      <div class="card rv" style="--d:.12s"><h3>行政 / 会计 / HR</h3><p>每个月要处理大量单据和 Invoice，想自动记录到 Google Sheet。</p></div>
+      <div class="card rv" style="--d:.24s"><h3>Marketing</h3><p>不想每天苦思要 Post 什么，想让 AI 规划内容并自动发布到专页。</p></div>
     </div>
   </div>
 </section>
 
 <section class="final" id="enroll">
+  <div class="float f1" aria-hidden="true"></div><div class="float f2" aria-hidden="true"></div><div class="float f3" aria-hidden="true"></div>
   <div class="wrap">
-    <h2>告诉我们你最想自动化的那件事。</h2>
-    <p>开课日期、上课形式和学费，请 WhatsApp 咨询，我们会根据你的需要推荐合适的安排。</p>
-    <div class="actions">
+    <h2 class="rv">告诉我们你最想自动化的那件事。</h2>
+    <p class="rv" style="--d:.1s">开课日期、上课形式和学费，请 WhatsApp 咨询，我们会根据你的需要推荐合适的安排。</p>
+    <div class="actions rv" style="--d:.2s">
       <a class="btn" data-wa href="#enroll">WhatsApp 咨询课程</a>
       <a class="btn btn--ghost" href="/">先看 Vibe Coding 课程</a>
     </div>
@@ -218,7 +489,7 @@ footer .disclaimer.wrap{border-top:0;padding-top:0}
     <span>Shine On Digital · AI 自动化 + 小助理课程</span>
     <span><a href="/">Vibe Coding 课程</a> · <a href="/articles/">数码营销文章</a></span>
   </div>
-  <p class="disclaimer wrap">本课程为独立培训课程，与 Anthropic 无隶属关系。Claude 为 Anthropic 的商标。</p>
+  <p class="disclaimer wrap">本课程为独立培训课程，与 Anthropic 无隶属关系。Claude 为 Anthropic 的商标。页面中的示范画面使用示例数据。</p>
 </footer>
 
 <script>
@@ -228,6 +499,123 @@ document.querySelectorAll("[data-wa]").forEach(a=>{
   a.href = "https://wa.me/"+WA_NUMBER+"?text="+encodeURIComponent(a.dataset.waText || WA_TEXT);
   a.target = "_blank"; a.rel = "noopener";
 });
+
+const $ = (s,r=document)=>r.querySelector(s), $$ = (s,r=document)=>[...r.querySelectorAll(s)];
+const reduce = matchMedia("(prefers-reduced-motion: reduce)").matches;
+
+/* 滚动进度条 */
+(function(){
+  const bar=$("#progress");
+  const f=()=>{const h=document.documentElement;const m=h.scrollHeight-h.clientHeight;bar.style.transform="scaleX("+(m>0?h.scrollTop/m:0)+")"};
+  addEventListener("scroll",f,{passive:true});f();
+})();
+
+/* 滚动出现 + 数字滚动 */
+(function(){
+  const countUp=el=>{
+    const to=+el.dataset.count; if(reduce){el.textContent=to.toLocaleString();return}
+    const t0=performance.now(), d=1600;
+    (function tick(t){const p=Math.min((t-t0)/d,1);el.textContent=Math.round(to*(1-Math.pow(1-p,3))).toLocaleString();if(p<1)requestAnimationFrame(tick)})(t0);
+  };
+  const io=new IntersectionObserver(es=>es.forEach(e=>{
+    if(!e.isIntersecting)return;
+    e.target.classList.add("in");
+    $$("[data-count]",e.target).forEach(countUp);
+    io.unobserve(e.target);
+  }),{threshold:.2});
+  $$(".rv").forEach(el=>io.observe(el));
+})();
+
+/* 卡片光晕跟随鼠标 */
+$$(".topic").forEach(c=>c.addEventListener("pointermove",e=>{
+  const r=c.getBoundingClientRect();
+  c.style.setProperty("--mx",(e.clientX-r.left)+"px");c.style.setProperty("--my",(e.clientY-r.top)+"px");
+}));
+
+/* 首屏示范：三个场景自动轮播 */
+(function(){
+  const tabs=$$(".tab"), scenes=$$(".scene"), DUR=7000;
+  let cur=0, timers=[], auto=null, paused=false;
+  const at=(ms,fn)=>timers.push(setTimeout(fn,ms));
+  const clear=()=>{timers.forEach(clearTimeout);timers=[];clearTimeout(auto)};
+
+  function reset(){
+    $$(".day").forEach(d=>d.classList.remove("on","done"));
+    $("#fbpost").classList.remove("on");
+    $("#cap0").innerHTML='<span class="dots"><i></i><i></i><i></i></span><span>AI 正在规划本周内容…</span>';
+    $$("#sheet .rw").forEach(r=>r.classList.remove("on"));
+    $("#cnt").textContent="0"; $("#bar").style.transition="none"; $("#bar").style.width="0";
+    scenes[1].classList.remove("run");
+    $$(".chat").forEach(c=>c.classList.remove("on","typing"));
+  }
+  const play={
+    0(){
+      const days=$$(".day");
+      days.forEach((d,i)=>at(500+i*340,()=>d.classList.add("on")));
+      at(500+7*340,()=>{$("#cap0").innerHTML="<b>已排程 7 篇 Post 和图片</b>，自动发布中…"});
+      days.forEach((d,i)=>at(3300+i*230,()=>d.classList.add("done")));
+      at(3300+7*230-200,()=>$("#fbpost").classList.add("on"));
+      at(3300+7*230+200,()=>{$("#cap0").innerHTML="<b>全部发布完成</b>，你一个字都没打。"});
+    },
+    1(){
+      scenes[1].classList.add("run");
+      $$("#sheet .rw").forEach((r,i)=>at(400+i*600,()=>r.classList.add("on")));
+      const cnt=$("#cnt"), bar=$("#bar"), t0=performance.now(), d=4600;
+      at(300,()=>{bar.style.transition="width "+d+"ms cubic-bezier(.3,.6,.3,1)";bar.style.width="100%"});
+      (function tick(t){
+        if(cur!==1)return;
+        const p=Math.min((t-t0-300)/d,1); if(p>0)cnt.textContent=Math.round(1000*(1-Math.pow(1-p,2.2))).toLocaleString();
+        if(p<1)requestAnimationFrame(tick);
+      })(t0);
+    },
+    2(){
+      $$(".chat").forEach((c,i)=>{at(300+i*1250,()=>c.classList.add("on","typing"));at(300+i*1250+850,()=>c.classList.remove("typing"))});
+    }
+  };
+  function show(i,fromUser){
+    clear(); cur=i; reset();
+    tabs.forEach((t,k)=>{t.setAttribute("aria-selected",k===i);t.style.setProperty("--dur",DUR+"ms")});
+    scenes.forEach((s,k)=>s.classList.toggle("on",k===i));
+    if(reduce){ // 静态结果
+      $$(".day").forEach(d=>d.classList.add("on","done"));$("#fbpost").classList.add("on");
+      $$("#sheet .rw").forEach(r=>r.classList.add("on"));$("#cnt").textContent="1,000";$("#bar").style.width="100%";
+      $$(".chat").forEach(c=>c.classList.add("on"));return;
+    }
+    play[i]();
+    if(!paused) auto=setTimeout(()=>show((i+1)%3),DUR);
+  }
+  tabs.forEach((t,k)=>t.addEventListener("click",()=>{paused=true;show(k,true)}));
+  const demo=$("#demo");
+  demo.addEventListener("mouseenter",()=>{paused=true;clearTimeout(auto)});
+  demo.addEventListener("mouseleave",()=>{if(paused){paused=false;auto=setTimeout(()=>show((cur+1)%3),2500)}});
+  $$("[data-demo]").forEach(b=>b.addEventListener("click",()=>{
+    paused=true; show(+b.dataset.demo,true);
+    demo.scrollIntoView({behavior:reduce?"auto":"smooth",block:"center"});
+  }));
+  show(0);
+})();
+
+/* 部门小助理：点选看汇报 */
+(function(){
+  const data=[
+    ["销售助理","本周新增客户 12 位，其中 3 位待跟进，已整理好名单。"],
+    ["人事助理","本周有 2 份请假申请等待审批，下周有 1 位新同事报到。"],
+    ["营销助理","本周 7 篇 Post 已全部发布，互动最高的是周三那一篇。"],
+    ["行政助理","本月单据已全部记录到 Google Sheet，没有发现异常。"]
+  ];
+  const nodes=$$(".org .node"), who=$("#rwho"), msg=$("#rmsg");
+  function pick(i){
+    nodes.forEach((n,k)=>n.classList.toggle("on",k===i));
+    who.textContent=data[i][0];
+    msg.style.animation="none";void msg.offsetWidth;msg.style.animation="";
+    msg.textContent=data[i][1];
+  }
+  nodes.forEach((n,i)=>{
+    n.addEventListener("click",()=>pick(i));
+    n.addEventListener("mouseenter",()=>pick(i));
+    n.addEventListener("keydown",e=>{if(e.key==="Enter"||e.key===" "){e.preventDefault();pick(i)}});
+  });
+})();
 </script>
 </body>
 </html>
