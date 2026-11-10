@@ -72,7 +72,7 @@ h2{font-size:clamp(28px,4.2vw,46px);max-width:19em;text-wrap:balance}
 .cswitch a{display:inline-flex;align-items:center;min-height:34px;padding:0 14px;border-radius:99px;font:700 14px/1 var(--sans);color:var(--muted);text-decoration:none;white-space:nowrap}
 .cswitch a:hover{color:var(--text)}
 .cswitch a[aria-current="page"]{background:var(--btn);color:var(--btn-ink)}
-@media(max-width:600px){.brand{font-size:15px}.nav .wrap{flex-wrap:wrap;padding:8px 0}.nav nav{width:100%;justify-content:space-between;gap:6px}.cswitch a{padding:0 8px;font-size:12px}.nav .btn{padding:0 10px;font-size:12px}.fb-link{width:32px;height:32px}}
+@media(max-width:600px){.brand{font-size:15px}.nav nav{gap:6px}.nav .btn{padding:0 10px;font-size:12px}.fb-link{width:32px;height:32px}}
 
 /* hero */
 .hero{position:relative;overflow:hidden;padding:clamp(40px,6vw,84px) 0 clamp(64px,8vw,104px);background:radial-gradient(60% 55% at 88% 0%,rgba(217,119,87,.18),transparent 70%),radial-gradient(45% 45% at 0% 100%,rgba(76,107,71,.14),transparent 70%),linear-gradient(var(--line) 1px,transparent 1px) 0 0/48px 48px,linear-gradient(90deg,var(--line) 1px,transparent 1px) 0 0/48px 48px,var(--void)}
@@ -293,6 +293,34 @@ h2{font-size:clamp(28px,4.2vw,46px);max-width:19em;text-wrap:balance}
 .faq summary:hover{color:var(--cyan)}
 .faq .ans{padding:0 12px 24px;color:var(--muted);max-width:34em}
 
+/* 手机目录 */
+.menu-btn{display:none;order:1;align-items:center;gap:8px;min-height:40px;padding:0 14px;border-radius:8px;border:1px solid var(--line-hi);background:var(--void);color:var(--text);font:700 15px/1 var(--sans);cursor:pointer;white-space:nowrap}
+.menu-ico{width:16px;height:12px;background:linear-gradient(currentColor,currentColor) 0 0/100% 2px no-repeat,linear-gradient(currentColor,currentColor) 0 50%/100% 2px no-repeat,linear-gradient(currentColor,currentColor) 0 100%/100% 2px no-repeat}
+.menu-sheet,.menu-backdrop{display:none}
+.menu-sheet{position:absolute;left:0;right:0;top:100%;z-index:2;background:var(--void);border-bottom:1px solid var(--line-hi);box-shadow:0 24px 40px rgba(60,40,20,.22);max-height:calc(100vh - 64px);max-height:calc(100dvh - 64px);overflow:auto;padding:16px 16px 20px}
+.menu-sheet ul{list-style:none;padding:0;display:grid;grid-template-columns:1fr 1fr;gap:8px}
+.menu-sheet a.m{display:flex;align-items:center;min-height:46px;padding:8px 12px;border:1px solid var(--line);border-radius:10px;background:var(--panel);text-decoration:none;color:var(--text);font:500 15px/1.35 var(--sans)}
+.menu-sheet a.m.on{border-color:var(--cyan);background:var(--cyan-dim);color:var(--cyan);font-weight:700}
+.menu-sheet .menu-cta{margin-top:14px;width:100%;justify-content:center}
+.menu-sheet .cswitch{display:flex;margin-bottom:14px}
+.menu-sheet .cswitch a{flex:1;justify-content:center;min-height:40px}
+.menu-backdrop{position:fixed;inset:0;z-index:35;background:rgba(20,20,19,.45)}
+@keyframes menuIn{from{opacity:0;transform:translateY(-8px)}to{opacity:1;transform:none}}
+.menu-open{overflow:hidden}
+@media(min-width:761px){.menu-sheet .cswitch{display:none}}
+@media(max-width:760px){
+  .nav .subnav{display:none}
+  html{scroll-padding-top:72px}
+  .menu-btn{display:inline-flex}
+  .nav .wrap{flex-wrap:nowrap;padding:0;gap:8px}
+  .brand{margin-right:auto}
+  .nav nav{order:2}
+  .nav nav .cswitch{display:none}
+  .menu-sheet.open{display:block;animation:menuIn .22s ease-out}
+  .menu-backdrop:not([hidden]){display:block}
+}
+@media(max-width:440px){.nav .wrap{gap:6px;width:calc(100% - 24px)}.brand{font-size:13px;gap:5px}.nav .btn{padding:0 8px;font-size:12px}.menu-btn{padding:0 8px;font-size:13px}.nav .btn[data-wa]{animation:none}}
+
 /* final + footer */
 .final{position:relative;overflow:hidden;padding:clamp(72px,10vw,128px) 0;color:var(--text);background:radial-gradient(50% 70% at 80% 100%,rgba(217,119,87,.28),transparent 70%),radial-gradient(45% 60% at 8% 0%,rgba(130,168,115,.22),transparent 70%),var(--void)}
 .final .wrap{position:relative;z-index:1}
@@ -329,11 +357,27 @@ footer .disclaimer.wrap{border-top:0;padding-top:0}
       <a class="fb-link" href="https://www.facebook.com/kgtey.official" target="_blank" rel="noopener" aria-label="Facebook 专页"><svg viewBox="0 0 24 24" aria-hidden="true"><path fill="currentColor" d="M24 12.07C24 5.4 18.63 0 12 0S0 5.4 0 12.07C0 18.1 4.39 23.1 10.13 24v-8.44H7.08v-3.49h3.05V9.41c0-3.02 1.79-4.7 4.53-4.7 1.31 0 2.68.24 2.68.24v2.97h-1.51c-1.49 0-1.96.93-1.96 1.89v2.26h3.33l-.53 3.49h-2.8V24C19.61 23.1 24 18.1 24 12.07z"/></svg></a>
       <a class="btn" data-wa href="#enroll">WhatsApp 咨询</a>
     </nav>
+    <button class="menu-btn" type="button" aria-expanded="false" aria-controls="menu"><span class="menu-ico" aria-hidden="true"></span><span class="menu-label">目录</span></button>
   </div>
   <div class="subnav"><div class="wrap">
     <a href="#teacher">关于老师</a><a href="#learn">课程内容</a><a href="#worries">常见担心</a><a href="#faq">FAQ</a>
   </div></div>
+  <div class="menu-sheet" id="menu" role="navigation" aria-label="页面目录">
+    <div class="cswitch" aria-label="选择课程"><a href="/">Vibe Coding</a><a href="/automation-assistant/" aria-current="page">自动化 + 小助理</a></div>
+    <ul>
+      <li><a class="m" href="#learn">课程内容</a></li>
+      <li><a class="m" href="#how">自动化流程</a></li>
+      <li><a class="m" href="#agents">部门小助理</a></li>
+      <li><a class="m" href="#who">适合谁</a></li>
+      <li><a class="m" href="#teacher">讲师 KG Tey</a></li>
+      <li><a class="m" href="#worries">常见担心</a></li>
+      <li><a class="m" href="#faq">常见问题 FAQ</a></li>
+      <li><a class="m" href="#enroll">咨询报名</a></li>
+    </ul>
+    <a class="btn menu-cta" data-wa href="#enroll">WhatsApp 咨询</a>
+  </div>
 </header>
+<div class="menu-backdrop" hidden></div>
 
 <main>
 <section class="hero">
@@ -616,7 +660,7 @@ const reduce = matchMedia("(prefers-reduced-motion: reduce)").matches;
   map.forEach((a,id)=>{const el=document.getElementById(id); if(el)io.observe(el)});
   /* 点击按钮：自己计算位置再滚动，比浏览器默认的锚点滚动更稳 */
   const reduceMotion=matchMedia("(prefers-reduced-motion: reduce)").matches;
-  links.forEach(a=>a.addEventListener("click",e=>{
+  [...links,...document.querySelectorAll(".menu-sheet a.m")].forEach(a=>a.addEventListener("click",e=>{
     const el=document.getElementById(a.getAttribute("href").slice(1)); if(!el)return;
     e.preventDefault();
     history.replaceState(null,"","#"+el.id);
@@ -635,6 +679,29 @@ const reduce = matchMedia("(prefers-reduced-motion: reduce)").matches;
       if(p<1)raf=requestAnimationFrame(step); else{jump(target());stop()}
     })(t0);
   }));
+})();
+
+/* 手机目录：点开选择要看的区块 */
+(function(){
+  const btn=document.querySelector(".menu-btn"), sheet=document.getElementById("menu"), back=document.querySelector(".menu-backdrop");
+  if(!btn||!sheet||!back) return;
+  const root=document.documentElement, label=btn.querySelector(".menu-label");
+  function set(open){
+    sheet.classList.toggle("open",open); back.hidden=!open;
+    btn.setAttribute("aria-expanded",String(open)); label.textContent=open?"关闭":"目录";
+    root.classList.toggle("menu-open",open);
+  }
+  btn.addEventListener("click",()=>set(!sheet.classList.contains("open")));
+  back.addEventListener("click",()=>set(false));
+  sheet.addEventListener("click",e=>{ if(e.target.closest("a")) set(false); });
+  addEventListener("keydown",e=>{ if(e.key==="Escape") set(false); });
+  matchMedia("(min-width: 761px)").addEventListener("change",e=>{ if(e.matches) set(false); });
+  const links=[...sheet.querySelectorAll("a.m")], map=new Map(links.map(a=>[a.getAttribute("href").slice(1),a]));
+  const io=new IntersectionObserver(es=>es.forEach(e=>{
+    if(!e.isIntersecting) return;
+    links.forEach(l=>l.classList.remove("on")); const l=map.get(e.target.id); if(l) l.classList.add("on");
+  }),{rootMargin:"-45% 0px -50% 0px"});
+  map.forEach((_,id)=>{ const n=document.getElementById(id); if(n) io.observe(n); });
 })();
 
 /* 滚动进度条 */

@@ -394,6 +394,7 @@ h2{font-size:clamp(28px,4.2vw,48px);max-width:19em;text-wrap:balance}
 .subnav a{flex:none;display:inline-flex;align-items:center;min-height:34px;padding:0 16px;border-radius:99px;font:500 15px/1 var(--sans);color:var(--muted);text-decoration:none;white-space:nowrap;transition:color .2s,background .2s}
 .subnav a:hover{color:var(--text);background:var(--cyan-dim)}
 .subnav a.on{color:var(--cyan);background:var(--cyan-dim);font-weight:700}
+@media(max-width:760px){.nav .subnav{display:none}html{scroll-padding-top:72px}}
 
 @media(max-width:1180px){.nav nav>a:not(.btn):not(.fb-link){display:none}}
 /* 课程切换 */
@@ -663,22 +664,6 @@ h2{font-size:clamp(28px,4.2vw,48px);max-width:19em;text-wrap:balance}
 .final h2{font-size:clamp(32px,5.4vw,60px);max-width:12em}
 .final p{margin-top:20px;max-width:30em;color:var(--muted);font-size:18px}
 .final .actions{margin-top:36px;display:flex;flex-wrap:wrap;gap:12px}
-.final-grid{display:grid;grid-template-columns:minmax(0,1.15fr) minmax(0,.85fr);gap:clamp(32px,5vw,72px);align-items:start}
-.early{padding:clamp(22px,3vw,34px);border:1px solid var(--line-hi);border-radius:12px;background:rgba(31,30,29,.82);backdrop-filter:blur(6px)}
-.early-tag{display:inline-block;padding:4px 12px;border-radius:99px;background:var(--cyan-dim);color:var(--cyan);font:700 13px/1.4 var(--sans);letter-spacing:.06em}
-.early h3{margin-top:12px;font-size:clamp(22px,2.6vw,28px);line-height:1.35}
-.early h3 b{color:var(--cyan)}
-.final .early p{margin-top:10px;font-size:16px;line-height:1.7}
-.early label{display:block;margin:16px 0 6px;font-weight:700;font-size:15px}
-.early label i{font-style:normal;font-weight:400;color:var(--muted)}
-.early input{width:100%;min-height:48px;padding:0 14px;border:1px solid var(--line-hi);border-radius:8px;background:var(--void);color:var(--text);font:400 16px/1.4 var(--sans)}
-.early input::placeholder{color:#8a887f}
-.early input:focus-visible{outline:2px solid var(--cyan);outline-offset:1px;border-color:var(--cyan)}
-.early input[aria-invalid="true"]{border-color:var(--chop)}
-.final .early .e-err{margin-top:12px;color:var(--chop);font-size:15px}
-.early .btn{width:100%;margin-top:20px}
-.early small{display:block;margin-top:12px;color:var(--muted);font-size:13px;line-height:1.7}
-@media(max-width:860px){.final-grid{grid-template-columns:1fr}}
 .proof{padding:clamp(56px,7vw,88px) 0;border-top:1px solid var(--line);background:linear-gradient(rgba(250,249,245,.975),rgba(240,238,230,.955)),url(assets/photos/reviews-bg.jpg) center/cover}
 .proof-in{display:flex;flex-wrap:wrap;align-items:center;justify-content:space-between;gap:24px 48px}
 .proof h2{font-size:clamp(24px,3.2vw,36px)}
@@ -913,7 +898,7 @@ footer .wrap{border-top:1px solid var(--line);padding-top:24px}
       <li><a class="m" href="#worries">常见担心</a></li>
       <li><a class="m" href="#faq">常见问题 FAQ</a></li>
       <li><a class="m" href="#corporate">企业内训</a></li>
-      <li><a class="m" href="#enroll">早鸟登记 RM100</a></li>
+      <li><a class="m" href="#enroll">咨询报名</a></li>
     </ul>
     <a class="btn menu-cta" data-wa href="#enroll">WhatsApp 咨询</a>
   </div>
@@ -1455,7 +1440,7 @@ footer .wrap{border-top:1px solid var(--line);padding-top:24px}
 </section>
 
 <section class="final" id="enroll">
-  <div class="wrap final-grid">
+  <div class="wrap">
    <div class="final-main">
     <h2 data-r>先把公司的第一个小系统做出来。</h2>
     <p data-r>告诉我们你公司最想先解决的那一件事，我们会告诉你哪几个主题最适合你，以及下一期的安排。</p>
@@ -1468,18 +1453,6 @@ footer .wrap{border-top:1px solid var(--line);padding-top:24px}
       <p><b>企业内训</b><br>提供企业 AI 培训，服务马来西亚全国，有需要欢迎联系我们</p>
     </address>
    </div>
-   <form class="early" id="early" data-r novalidate aria-labelledby="early-t">
-     <span class="early-tag">早鸟优惠</span>
-     <h3 id="early-t">登记即可索取 <b>RM100</b> 现金回扣</h3>
-     <p>留下名字和联络方式，我们会通过 WhatsApp 联系你，告诉你早鸟回扣怎么领，以及下一期的安排。</p>
-     <label for="e-name">姓名</label>
-     <input id="e-name" name="name" type="text" autocomplete="name" required maxlength="60" placeholder="例如：陈小明">
-     <label for="e-phone">WhatsApp / 手机号码</label>
-     <input id="e-phone" name="phone" type="tel" inputmode="tel" autocomplete="tel" required maxlength="20" placeholder="例如：012-345 6789">
-     <p class="e-err" id="e-err" role="alert" hidden></p>
-     <button class="btn" type="submit">登记并索取早鸟回扣</button>
-     <small>点击后会打开 WhatsApp，把你的登记资料发给我们，按「发送」才算完成登记。名额有限，回扣条件以我们 WhatsApp 回复为准。资料只用来联络你，不会转给第三者。</small>
-   </form>
   </div>
 </section>
 </main>
@@ -1515,7 +1488,7 @@ document.querySelectorAll("[data-wa]").forEach(a=>{
   map.forEach((a,id)=>{const el=document.getElementById(id); if(el)io.observe(el)});
   /* 点击按钮：自己计算位置再滚动，比浏览器默认的锚点滚动更稳 */
   const reduceMotion=matchMedia("(prefers-reduced-motion: reduce)").matches;
-  links.forEach(a=>a.addEventListener("click",e=>{
+  [...links,...document.querySelectorAll(".menu-sheet a.m")].forEach(a=>a.addEventListener("click",e=>{
     const el=document.getElementById(a.getAttribute("href").slice(1)); if(!el)return;
     e.preventDefault();
     history.replaceState(null,"","#"+el.id);
@@ -1534,30 +1507,6 @@ document.querySelectorAll("[data-wa]").forEach(a=>{
       if(p<1)raf=requestAnimationFrame(step); else{jump(target());stop()}
     })(t0);
   }));
-})();
-
-/* 早鸟登记：没有后台，资料通过 WhatsApp 预填信息发给老师 */
-(function(){
-  const f = document.getElementById("early"); if(!f) return;
-  const err = document.getElementById("e-err");
-  f.addEventListener("submit", e=>{
-    e.preventDefault();
-    const name = f.elements.name.value.trim(), phone = f.elements.phone.value.trim();
-    const digits = phone.replace(/\D/g,"");
-    f.elements.name.removeAttribute("aria-invalid"); f.elements.phone.removeAttribute("aria-invalid");
-    let msg = "";
-    if(name.length < 2){ f.elements.name.setAttribute("aria-invalid","true"); msg = "请填写你的姓名。"; f.elements.name.focus(); }
-    else if(!/^[+\d][\d\s\-()+]*$/.test(phone) || digits.length < 9 || digits.length > 15){ f.elements.phone.setAttribute("aria-invalid","true"); msg = "请填写正确的手机号码，例如 012-345 6789。"; f.elements.phone.focus(); }
-    err.style.color = ""; err.hidden = !msg; err.textContent = msg;
-    if(msg) return;
-    const text = "你好，我想登记早鸟优惠（现金回扣 RM100）。\n姓名："+name+"\n联络号码："+phone+"\n想了解 Claude Code 企业应用基础课程的下一期。";
-    try{ oaiq("measure","registration_completed",{ type:"customer_action" }); }catch(e){}
-    const url = "https://wa.me/"+WA_NUMBER+"?text="+encodeURIComponent(text);
-    err.hidden = false; err.style.color = "var(--ok)";
-    err.innerHTML = '正在打开 WhatsApp，请按「发送」完成登记。没有自动打开？<a href="'+url+'" target="_blank" rel="noopener" style="color:inherit;text-decoration:underline">点这里</a>';
-    const a = document.createElement("a"); a.href = url; a.target = "_blank"; a.rel = "noopener";
-    document.body.appendChild(a); a.click(); a.remove();
-  });
 })();
 
 const reduce = matchMedia("(prefers-reduced-motion: reduce)").matches;
