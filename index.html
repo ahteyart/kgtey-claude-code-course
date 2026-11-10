@@ -388,6 +388,17 @@ h2{font-size:clamp(28px,4.2vw,48px);max-width:19em;text-wrap:balance}
 .nav nav a.btn{color:var(--btn-ink)}
 .nav nav a.btn:hover{color:var(--btn-ink)}
 @media(max-width:760px){.nav nav a:not(.btn){display:none}}
+.nav nav a{white-space:nowrap}
+@media(max-width:1180px){.nav nav>a:not(.btn){display:none}}
+/* 课程切换 */
+.cswitch{display:inline-flex;padding:3px;border:1px solid var(--line-hi);border-radius:99px;background:var(--panel);gap:2px}
+.nav nav .cswitch a,.cswitch a{display:inline-flex;align-items:center;min-height:34px;padding:0 14px;border-radius:99px;font:700 14px/1 var(--sans);color:var(--muted);text-decoration:none;white-space:nowrap}
+.nav nav .cswitch a:hover{color:var(--text)}
+.nav nav .cswitch a[aria-current="page"],.cswitch a[aria-current="page"]{background:var(--btn);color:var(--btn-ink)}
+.menu-sheet .cswitch{display:flex;margin-bottom:14px}
+.menu-sheet .cswitch a{flex:1;justify-content:center;min-height:40px}
+@media(max-width:760px){.nav nav .cswitch{display:none}}
+@media(min-width:761px){.menu-sheet .cswitch{display:none}}
 @media(max-width:520px){.brand{font-size:15px}.nav .btn{padding:0 12px;font-size:13px}}
 .course-name{display:inline-flex;align-items:center;gap:12px;margin-bottom:26px;padding:10px 20px;border-radius:99px;background:var(--cyan-dim);border:1px solid color-mix(in srgb,var(--cyan) 45%,transparent);color:var(--cyan);font:700 clamp(18px,2.2vw,24px)/1.3 var(--serif)}
 .course-name::before{content:"";width:9px;height:9px;background:var(--cyan);transform:rotate(45deg);flex:none}
@@ -876,6 +887,7 @@ footer .wrap{border-top:1px solid var(--line);padding-top:24px}
   <div class="wrap">
     <a class="brand" href="#top"><i></i>Shine On Digital<small>Claude Code 企业应用基础课程</small></a>
     <nav aria-label="主导航">
+      <span class="cswitch" aria-label="选择课程"><a href="/" aria-current="page">Vibe Coding</a><a href="/automation-assistant/">自动化 + 小助理</a></span>
       <a href="#teacher">关于老师</a>
       <a href="#curriculum">课程内容</a>
       <a href="#worries">常见担心</a>
@@ -885,6 +897,7 @@ footer .wrap{border-top:1px solid var(--line);padding-top:24px}
     <button class="menu-btn" type="button" aria-expanded="false" aria-controls="menu"><span class="menu-ico" aria-hidden="true"></span><span class="menu-label">目录</span></button>
   </div>
   <div class="menu-sheet" id="menu" role="navigation" aria-label="页面目录">
+    <div class="cswitch" aria-label="选择课程"><a href="/" aria-current="page">Vibe Coding</a><a href="/automation-assistant/">自动化 + 小助理</a></div>
     <ul>
       <li><a class="m" href="#curriculum">课程内容</a></li>
       <li><a class="m" href="#teacher">讲师 KG Tey</a></li>
@@ -913,6 +926,7 @@ footer .wrap{border-top:1px solid var(--line);padding-top:24px}
       <div class="actions" data-r>
         <a class="btn" data-wa href="#enroll">WhatsApp 咨询下一期</a>
         <a class="btn btn--ghost" href="#curriculum">看 7 个模块学什么</a>
+        <a class="btn btn--ghost" href="/automation-assistant/">自动化 + 小助理课程 →</a>
       </div>
       <ul class="facts" data-r>
         <li>新山现场上课，中文教学</li>
@@ -1479,7 +1493,7 @@ footer .wrap{border-top:1px solid var(--line);padding-top:24px}
 <footer>
   <div class="wrap foot">
     <span>Shine On Digital · Claude Code 企业应用基础课程</span>
-    <span><a href="/articles/">数码营销文章</a> · <a href="https://www.facebook.com/kgtey.official/reviews" target="_blank" rel="noopener">Facebook 学员评价</a></span>
+    <span><a href="/automation-assistant/">自动化 + 小助理课程</a> · <a href="/articles/">数码营销文章</a> ·<a href="https://www.facebook.com/kgtey.official/reviews" target="_blank" rel="noopener">Facebook 学员评价</a></span>
   </div>
   <p class="disclaimer wrap">本课程为独立培训课程，与 Anthropic 无隶属关系。Claude 和 Claude Code 为 Anthropic 的商标。</p>
 </footer>
