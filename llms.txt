@@ -6,7 +6,7 @@
 - 形式：一天实体课，新山现场上课，中文教学
 - 时间：周末，10AM–6PM；每月两班
 - 人数：小班制，每班 12 人；学员自备笔记本电脑
-- 教学重点：不追求做完几个系统，而是教建立系统的架构、方法、格式和安全性（含 Skill、MCP、Dashboard、Landing Page、OCR）
+- 教学重点：不追求做完几个系统，而是教建立系统的架构、方法、格式和安全性（含 Google Sheet/Excel Dashboard、带预约与 WhatsApp 的专业网站、OCR 手机扫描 Web App、系统创建流程与部署、Skill 与 MCP）
 - 课后支援：WhatsApp 学员群，老师定期更新 AI 资讯和方法
 - 证书：没有证书
 - 学费：请 WhatsApp 了解有关学费

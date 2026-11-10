@@ -4,7 +4,7 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>AI 自动化 + 小助理课程｜Shine On Digital</title>
-<meta name="description" content="学会用 AI 把重复的工作自动化，并为自己和公司建立 AI 小助理。不需要编程基础，中文授课。新山 Shine On Digital。">
+<meta name="description" content="学会用 AI 自动发 FB Post、自动记录单据和 Invoice 到 Google Sheet，并用 Hermes Agent 为企业每个部门建立小助理。中文授课。">
 <link rel="canonical" href="https://shineondigital.com.my/automation-assistant/">
 <meta name="robots" content="index,follow,max-image-preview:large,max-snippet:-1">
 <meta name="author" content="KG Tey">
@@ -13,7 +13,7 @@
 <meta property="og:site_name" content="Shine On Digital">
 <meta property="og:locale" content="zh_CN">
 <meta property="og:title" content="AI 自动化 + 小助理课程｜Shine On Digital">
-<meta property="og:description" content="把重复的工作交给 AI 自动完成，并建立专属于你的 AI 小助理。">
+<meta property="og:description" content="FB Post 自动化、单据自动记录、Hermes Agent 部门小助理。">
 <meta property="og:url" content="https://shineondigital.com.my/automation-assistant/">
 <meta property="og:image" content="https://shineondigital.com.my/assets/og-image.jpg">
 <meta name="theme-color" content="#FAF9F5">
@@ -57,11 +57,14 @@ h2{font-size:clamp(28px,4.2vw,46px);max-width:19em;text-wrap:balance}
 .brand i{width:10px;height:10px;background:var(--cyan);transform:rotate(45deg)}
 .nav nav{display:flex;align-items:center;gap:20px;font-size:15px}
 .nav .btn{min-height:40px;padding:0 18px;font-size:15px;white-space:nowrap}
+.fb-link{display:inline-flex;align-items:center;justify-content:center;flex:none;width:36px;height:36px;border-radius:50%;color:#1877F2!important;border:1px solid var(--line-hi);background:var(--panel);transition:transform .2s,background .2s}
+.fb-link:hover{transform:translateY(-1px);background:var(--cyan-dim)}
+.fb-link svg{width:18px;height:18px}
 .cswitch{display:inline-flex;padding:3px;border:1px solid var(--line-hi);border-radius:99px;background:var(--panel);gap:2px}
 .cswitch a{display:inline-flex;align-items:center;min-height:34px;padding:0 14px;border-radius:99px;font:700 14px/1 var(--sans);color:var(--muted);text-decoration:none;white-space:nowrap}
 .cswitch a:hover{color:var(--text)}
 .cswitch a[aria-current="page"]{background:var(--btn);color:var(--btn-ink)}
-@media(max-width:600px){.brand{font-size:15px}.nav .wrap{flex-wrap:wrap;padding:8px 0}.nav nav{width:100%;justify-content:space-between;gap:8px}.cswitch a{padding:0 10px;font-size:13px}.nav .btn{padding:0 12px;font-size:13px}}
+@media(max-width:600px){.brand{font-size:15px}.nav .wrap{flex-wrap:wrap;padding:8px 0}.nav nav{width:100%;justify-content:space-between;gap:8px}.cswitch a{padding:0 8px;font-size:12px}.nav .btn{padding:0 10px;font-size:12px}.fb-link{width:32px;height:32px}.nav nav{gap:6px}}
 
 /* hero */
 .hero{padding:clamp(48px,7vw,96px) 0 clamp(64px,9vw,112px);background:radial-gradient(60% 55% at 88% 0%,rgba(217,119,87,.18),transparent 70%),radial-gradient(45% 45% at 0% 100%,rgba(76,107,71,.14),transparent 70%),linear-gradient(var(--line) 1px,transparent 1px) 0 0/48px 48px,linear-gradient(90deg,var(--line) 1px,transparent 1px) 0 0/48px 48px,var(--void)}
@@ -113,6 +116,7 @@ footer .disclaimer.wrap{border-top:0;padding-top:0}
     <a class="brand" href="/"><i></i>Shine On Digital</a>
     <nav aria-label="主导航">
       <span class="cswitch" aria-label="选择课程"><a href="/">Vibe Coding</a><a href="/automation-assistant/" aria-current="page">自动化 + 小助理</a></span>
+      <a class="fb-link" href="https://www.facebook.com/kgtey.official" target="_blank" rel="noopener" aria-label="Facebook 专页"><svg viewBox="0 0 24 24" aria-hidden="true"><path fill="currentColor" d="M24 12.07C24 5.4 18.63 0 12 0S0 5.4 0 12.07C0 18.1 4.39 23.1 10.13 24v-8.44H7.08v-3.49h3.05V9.41c0-3.02 1.79-4.7 4.53-4.7 1.31 0 2.68.24 2.68.24v2.97h-1.51c-1.49 0-1.96.93-1.96 1.89v2.26h3.33l-.53 3.49h-2.8V24C19.61 23.1 24 18.1 24 12.07z"/></svg></a>
       <a class="btn" data-wa href="#enroll">WhatsApp 咨询</a>
     </nav>
   </div>
@@ -122,55 +126,65 @@ footer .disclaimer.wrap{border-top:0;padding-top:0}
 <section class="hero">
   <div class="wrap">
     <p class="course-name">AI 自动化 + 小助理课程</p>
-    <h1>让 AI 替你做重复的事，再多一个 24 小时在线的小助理。</h1>
-    <p class="sub">学会把每天重复的工作<b>自动化</b>，并为自己和公司建立专属的 <b>AI 小助理</b>。不需要编程基础，用中文就能上手。</p>
+    <h1>让 AI 替你发帖、记单据，再为每个部门配一个小助理。</h1>
+    <p class="sub">学会把每天重复的工作<b>自动化</b>，并为企业的每个部门建立专属的 <b>AI 小助理</b>，自动处理工作、汇报进度。不需要编程基础，中文授课。</p>
     <div class="actions">
       <a class="btn" data-wa href="#enroll">WhatsApp 咨询课程</a>
       <a class="btn btn--ghost" href="#learn">看看学什么</a>
       <a class="btn btn--ghost" href="/">← Vibe Coding 课程</a>
     </div>
     <ul class="facts">
-      <li>中文授课</li>
-      <li>无需编程基础</li>
-      <li>用公司真实的工作场景练习</li>
+      <li>FB Post 自动化</li>
+      <li>单据 / Invoice 自动记录</li>
+      <li>Hermes Agent 部门小助理</li>
     </ul>
   </div>
 </section>
 
-<section class="sec" id="why">
+<section class="sec" id="learn">
   <div class="wrap">
     <div class="sec-head">
-      <h2>自动化解决“做不完”，小助理解决“不会做”。</h2>
-      <p class="lede">两样东西加起来，让你把时间留给真正需要判断和决策的事。</p>
+      <h2>课程纲要：3 个能马上用在生意上的自动化。</h2>
+      <p class="lede">从发帖、单据到部门汇报，把每天重复的事交给 AI。</p>
     </div>
-    <div class="two">
+    <div class="grid">
       <div class="card">
-        <span class="num">01 · 自动化</span>
-        <h3>重复的事，设定一次，之后自动跑</h3>
-        <p>整理表格、归档文件、定时提醒、跨系统搬数据、生成固定格式的报告。把这些变成不用你动手的流程。</p>
+        <span class="num">01 · FB POST 自动化</span>
+        <h3>再也无需每天想要 Post 什么</h3>
+        <p>让 AI 帮你规划每个星期要做的 Post 和图片，然后自动发布到你自己的 Facebook 专页。</p>
       </div>
       <div class="card">
-        <span class="num">02 · AI 小助理</span>
-        <h3>一个懂你工作的助手，随时可以问、可以交代</h3>
-        <p>起草回复、整理会议内容、查资料、按公司的规矩回答问题。教你怎样训练它，让它越用越顺手。</p>
+        <span class="num">02 · 单据 / INVOICE 自动处理</span>
+        <h3>不管 100 张还是 1000 张，都自动记录</h3>
+        <p>自动处理单据或 Invoice，把里面的详细资料记录到 Google Sheet。再也不需要自己手动一笔一笔记录。</p>
+      </div>
+      <div class="card">
+        <span class="num">03 · HERMES AGENT 小助理</span>
+        <h3>为每个部门建立自己的助理</h3>
+        <p>了解为什么要用 Hermes 来制作企业自己的小助理，并为每个部门建立助理，处理工作，同时报告和汇报各部门的进度。</p>
       </div>
     </div>
   </div>
 </section>
 
-<section class="sec sec--panel" id="learn">
+<section class="sec sec--panel" id="why">
   <div class="wrap">
     <div class="sec-head">
-      <h2>你会学到什么。</h2>
-      <p class="lede">课程大纲以实际开课安排为准，详情请 WhatsApp 咨询。</p>
+      <h2>自动化解决“做不完”，小助理解决“要盯进度”。</h2>
+      <p class="lede">两样东西加起来，让你把时间留给真正需要判断和决策的事。</p>
     </div>
-    <ol class="track">
-      <li data-n="1"><h3>认识自动化：什么值得自动化</h3><p>怎样找出工作里最耗时间的重复环节，判断哪些适合交给 AI，哪些不适合。</p></li>
-      <li data-n="2"><h3>动手做第一个自动化流程</h3><p>从一个真实的小任务开始，把“手动做”变成“自动跑”，并学会测试和修正。</p></li>
-      <li data-n="3"><h3>建立你的 AI 小助理</h3><p>教它认识你的工作、你的语气和公司规则，让它能稳定地帮你处理日常事务。</p></li>
-      <li data-n="4"><h3>让小助理接上工具</h3><p>让助理能读取资料、整理内容、触发动作，成为自动化流程的一部分。</p></li>
-      <li data-n="5"><h3>安全与日常维护</h3><p>哪些资料不应该交给 AI，怎样设定权限，以及如何检查和持续改进。</p></li>
-    </ol>
+    <div class="two">
+      <div class="card">
+        <span class="num">自动化</span>
+        <h3>设定一次，之后自动跑</h3>
+        <p>每个星期的 FB Post、堆积如山的单据，这些重复的事，交给 AI 自动完成。</p>
+      </div>
+      <div class="card">
+        <span class="num">AI 小助理</span>
+        <h3>每个部门都有一个助理</h3>
+        <p>部门助理负责处理日常工作，并定期报告进度，老板不用逐个部门追问。</p>
+      </div>
+    </div>
   </div>
 </section>
 
@@ -180,9 +194,9 @@ footer .disclaimer.wrap{border-top:0;padding-top:0}
       <h2>适合谁。</h2>
     </div>
     <div class="grid">
-      <div class="card"><h3>老板与管理层</h3><p>想让公司少一点人工重复作业，把精力放在生意上。</p></div>
-      <div class="card"><h3>行政 / HR</h3><p>天天处理表格、文件、通知和询问，想把这些交给自动流程。</p></div>
-      <div class="card"><h3>Sales / Marketing</h3><p>需要快速跟进客户、整理资料、产出内容，想要一个得力的助理。</p></div>
+      <div class="card"><h3>老板与管理层</h3><p>想为各部门建立小助理，随时掌握每个部门的进度和汇报。</p></div>
+      <div class="card"><h3>行政 / 会计 / HR</h3><p>每个月要处理大量单据和 Invoice，想自动记录到 Google Sheet。</p></div>
+      <div class="card"><h3>Marketing</h3><p>不想每天苦思要 Post 什么，想让 AI 规划内容并自动发布到专页。</p></div>
     </div>
   </div>
 </section>

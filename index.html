@@ -99,16 +99,11 @@
    "inLanguage": "zh-Hans",
    "educationalLevel": "Beginner",
    "teaches": [
-    "Claude Code 基础操作",
-    "AI Vibe Coding 与 Prompt 技巧",
-    "Skill",
-    "MCP",
-    "企业网站与 Landing Page",
-    "企业管理系统（Admin / HR / Sales / Marketing）",
-    "OCR 文件识别与数据提取",
-    "数据 Dashboard 与报表",
-    "系统的架构、方法、格式与安全性",
-    "系统测试、Debug 与上线部署"
+    "连接 Google Sheet / Excel 制作数据 Dashboard",
+    "专业企业网站（预约、WhatsApp 与客户资料表单）",
+    "OCR 手机扫描 Web App（开销、库存、浪费记录系统）",
+    "系统创建流程：架构、安全措施与上线部署",
+    "Skill 与 MCP 的安装和使用"
    ],
    "audience": {
     "@type": "Audience",
@@ -201,7 +196,7 @@
      "name": "课程要上多久？一天怎么安排？",
      "acceptedAnswer": {
       "@type": "Answer",
-      "text": "公开班是一天课程，周末上午 10 点到下午 6 点。一天里按顺序走完 7 个模块，从装好工具，到学会建立、测试和上线一个系统的方法。小班制，每班 12 人，老师在旁边带着做。"
+      "text": "公开班是一天课程，周末上午 10 点到下午 6 点。一天里走完 5 大主题：Dashboard、专业网站、OCR 手机扫描、系统创建流程，以及 Skills 和 MCP，学会设计、搭建和上线一个系统的方法。小班制，每班 12 人，老师在旁边带着做。"
      }
     },
     {
@@ -265,7 +260,7 @@
      "name": "上课前要准备什么？",
      "acceptedAnswer": {
       "@type": "Answer",
-      "text": "自备一台能上网的笔记本电脑（Windows 或 Mac），以及一个 Claude 账号。第一个模块会带你一步步完成环境设置，不用事先装任何东西。"
+      "text": "自备一台能上网的笔记本电脑（Windows 或 Mac），以及一个 Claude 账号。上课时会带你一步步完成环境设置，不用事先装任何东西。"
      }
     },
     {
@@ -305,7 +300,7 @@
      "name": "我不是老板，只是 HR / Sales / 行政，适合吗？",
      "acceptedAnswer": {
       "@type": "Answer",
-      "text": "适合。很多重复、耗时的工作，正好是你最了解，也最能用小工具解决的。课程的第 4 模块会按岗位选择练习场景。"
+      "text": "适合。很多重复、耗时的工作，正好是你最了解，也最能用小工具解决的。课程会按你的岗位选择练习场景。"
      }
     },
     {
@@ -387,9 +382,12 @@ h2{font-size:clamp(28px,4.2vw,48px);max-width:19em;text-wrap:balance}
 .nav .btn{min-height:40px;padding:0 18px;font-size:15px}
 .nav nav a.btn{color:var(--btn-ink)}
 .nav nav a.btn:hover{color:var(--btn-ink)}
-@media(max-width:760px){.nav nav a:not(.btn){display:none}}
+@media(max-width:760px){.nav nav a:not(.btn):not(.fb-link){display:none}}
+.fb-link{display:inline-flex;align-items:center;justify-content:center;flex:none;width:36px;height:36px;border-radius:50%;color:#1877F2!important;border:1px solid var(--line-hi);background:var(--panel);transition:transform .2s,background .2s}
+.fb-link:hover{transform:translateY(-1px);background:var(--cyan-dim)}
+.fb-link svg{width:18px;height:18px}
 .nav nav a{white-space:nowrap}
-@media(max-width:1180px){.nav nav>a:not(.btn){display:none}}
+@media(max-width:1180px){.nav nav>a:not(.btn):not(.fb-link){display:none}}
 /* 课程切换 */
 .cswitch{display:inline-flex;padding:3px;border:1px solid var(--line-hi);border-radius:99px;background:var(--panel);gap:2px}
 .nav nav .cswitch a,.cswitch a{display:inline-flex;align-items:center;min-height:34px;padding:0 14px;border-radius:99px;font:700 14px/1 var(--sans);color:var(--muted);text-decoration:none;white-space:nowrap}
@@ -845,6 +843,7 @@ footer .wrap{border-top:1px solid var(--line);padding-top:24px}
 .brand,.menu-btn,.nav .btn{white-space:nowrap}
 @media(max-width:520px){.menu-btn{padding:0 11px;font-size:14px}.nav .wrap{gap:8px}.brand{font-size:15px;gap:7px}}
 @media(max-width:420px){.nav .wrap{width:calc(100% - 24px)}.brand{font-size:14px}.nav .btn[data-wa]::before{display:none}.nav .btn{padding:0 11px;font-size:13px}.menu-btn{padding:0 10px}}
+@media(max-width:440px){.nav .wrap{gap:6px}.brand{font-size:13px;gap:5px}.fb-link{width:32px;height:32px}.fb-link svg{width:16px;height:16px}.nav nav{gap:6px}.nav .btn{padding:0 8px;font-size:12px}.menu-btn{padding:0 8px;font-size:13px}}
 /* 反派模式：导弹、弹坑、掉落的字 */
 .bot .ev{display:none}
 .bot.evil .ev{display:inline}
@@ -892,6 +891,7 @@ footer .wrap{border-top:1px solid var(--line);padding-top:24px}
       <a href="#curriculum">课程内容</a>
       <a href="#worries">常见担心</a>
       <a href="#faq">FAQ</a>
+      <a class="fb-link" href="https://www.facebook.com/kgtey.official" target="_blank" rel="noopener" aria-label="Facebook 专页"><svg viewBox="0 0 24 24" aria-hidden="true"><path fill="currentColor" d="M24 12.07C24 5.4 18.63 0 12 0S0 5.4 0 12.07C0 18.1 4.39 23.1 10.13 24v-8.44H7.08v-3.49h3.05V9.41c0-3.02 1.79-4.7 4.53-4.7 1.31 0 2.68.24 2.68.24v2.97h-1.51c-1.49 0-1.96.93-1.96 1.89v2.26h3.33l-.53 3.49h-2.8V24C19.61 23.1 24 18.1 24 12.07z"/></svg></a>
       <a class="btn" data-wa href="#enroll">WhatsApp 咨询</a>
     </nav>
     <button class="menu-btn" type="button" aria-expanded="false" aria-controls="menu"><span class="menu-ico" aria-hidden="true"></span><span class="menu-label">目录</span></button>
@@ -925,14 +925,14 @@ footer .wrap{border-top:1px solid var(--line);padding-top:24px}
       <p class="sub" data-r>用 Claude Code 和 AI Vibe Coding，学会建立系统的方法，把你脑子里的想法变成<b>公司真的会用的网站、管理系统和工具</b>。不用外包，不用等 IT。</p>
       <div class="actions" data-r>
         <a class="btn" data-wa href="#enroll">WhatsApp 咨询下一期</a>
-        <a class="btn btn--ghost" href="#curriculum">看 7 个模块学什么</a>
+        <a class="btn btn--ghost" href="#curriculum">看 5 大主题学什么</a>
         <a class="btn btn--ghost" href="/automation-assistant/">自动化 + 小助理课程 →</a>
       </div>
       <ul class="facts" data-r>
         <li>新山现场上课，中文教学</li>
         <li>无需编程基础</li>
         <li>全程做真实的企业场景</li>
-        <li>最后一个模块教你上线</li>
+        <li>教你把系统部署上线</li>
       </ul>
     </div>
 
@@ -1004,7 +1004,7 @@ footer .wrap{border-top:1px solid var(--line);padding-top:24px}
       <div class="pain">
         <span class="ico"><svg viewBox="0 0 24 24" aria-hidden="true"><use href="#i-compass"/></svg></span>
         <q><span>我知道要用 AI，但不知道从哪里开始。</span></q>
-        <p>网上教学零散，看完还是不会动手。这门课是<b>一天里按顺序走的 7 步</b>，每一步都动手练。</p>
+        <p>网上教学零散，看完还是不会动手。这门课是<b>一天里按顺序走的 5 大主题</b>，每一步都动手练。</p>
       </div>
       <div class="pain">
         <span class="ico"><svg viewBox="0 0 24 24" aria-hidden="true"><use href="#i-puzzle"/></svg></span>
@@ -1114,8 +1114,8 @@ footer .wrap{border-top:1px solid var(--line);padding-top:24px}
 <section class="sec g-violet" id="curriculum">
   <div class="wrap">
     <div class="sec-head" data-r>
-      <h2>一天 7 个模块，从空白电脑一路做到上线。</h2>
-      <p class="lede">一天课程分成 7 个模块。我们不是只教你做几个固定的系统，而是教你建立系统的架构、方法、格式和安全性。学会这些，你就能做自己想做的系统。</p>
+      <h2>一天 5 大主题，从数据、网站到上线。</h2>
+      <p class="lede">一天课程分成 5 大主题。我们不是只教你做几个固定的系统，而是教你建立系统的架构、方法、格式和安全性。学会这些，你就能做自己想做的系统。</p>
     </div>
     <div class="pillars" data-r>
       <div class="pillar"><span class="ico"><svg viewBox="0 0 24 24" aria-hidden="true"><use href="#i-layout"/></svg></span><h3>架构</h3><p>一个系统由哪些部分组成，怎么拆、怎么连。</p></div>
@@ -1125,57 +1125,43 @@ footer .wrap{border-top:1px solid var(--line);padding-top:24px}
     </div>
     <div class="tools-wrap" data-r>
       <p class="tools-title">课堂上会教到</p>
-      <ul class="tools"><li>Skill</li><li>MCP</li><li>Dashboard</li><li>Landing Page</li><li>OCR</li></ul>
+      <ul class="tools"><li>Google Sheet / Excel</li><li>Dashboard</li><li>预约 + WhatsApp 网站</li><li>OCR 手机扫描</li><li>Skill</li><li>MCP</li></ul>
     </div>
     <ol class="track" id="track">
       <span class="rail" id="rail"></span>
       <li>
         <span class="dot">1</span>
         <div>
-          <h3><span class="ico ico--sm"><svg viewBox="0 0 24 24" aria-hidden="true"><use href="#i-terminal"/></svg></span>Claude Code 基础操作与开发环境设置</h3>
-          <p><b>你会学到：</b>装好开发环境，认识 Claude Code 的界面，并跑起第一个页面。不再对黑色窗口发怵。</p>
+          <h3><span class="ico ico--sm"><svg viewBox="0 0 24 24" aria-hidden="true"><use href="#i-chart"/></svg></span>连接 Google Sheet / Excel，做出清清楚楚的 Dashboard</h3>
+          <p><b>你会学到：</b>把 Google Sheet 或 Excel 的数据连接起来，做成 Dashboard。数据再多，也能整理得一目了然，管理层打开就看懂。</p>
         </div>
       </li>
       <li>
         <span class="dot">2</span>
         <div>
-          <h3><span class="ico ico--sm"><svg viewBox="0 0 24 24" aria-hidden="true"><use href="#i-chat"/></svg></span>AI Vibe Coding 与 Prompt 指令技巧</h3>
-          <p><b>你会学到：</b>怎样描述需求、怎样追问、怎样让 AI 改对而不是越改越乱，以及怎样把常用的做法存成 Skill，下次直接调用。</p>
+          <h3><span class="ico ico--sm"><svg viewBox="0 0 24 24" aria-hidden="true"><use href="#i-globe"/></svg></span>做专业、吸引眼球的企业网站</h3>
+          <p><b>你会学到：</b>跳出传统网站的样子，做一个让人愿意停下来看的网站，并加上<b>预约功能、WhatsApp 按钮和索取客户资料</b>的表单，访客一进来就能联络你。</p>
         </div>
       </li>
       <li>
         <span class="dot">3</span>
         <div>
-          <h3><span class="ico ico--sm"><svg viewBox="0 0 24 24" aria-hidden="true"><use href="#i-globe"/></svg></span>制作企业网站 &amp; Landing Page</h3>
-          <p><b>你会学到：</b>网站和 Landing Page 的结构、内容排版和发布流程，做出能对外发布的页面，适合 Marketing 和 Sales 马上用。</p>
+          <h3><span class="ico ico--sm"><svg viewBox="0 0 24 24" aria-hidden="true"><use href="#i-scan"/></svg></span>OCR 扫描：用手机做 Web App 系统</h3>
+          <p><b>你会学到：</b>用手机拍照，把图片里的文字自动记录下来，存进 Google Sheet 或 Web App。例如<b>开销记录（Expenses Tracking）、库存（Inventory）、浪费记录（Waste Tracking）</b>系统，告别重复 key in。</p>
         </div>
       </li>
       <li>
         <span class="dot">4</span>
         <div>
-          <h3><span class="ico ico--sm"><svg viewBox="0 0 24 24" aria-hidden="true"><use href="#i-layout"/></svg></span>建立简单企业管理系统（Admin / HR / Sales / Marketing）</h3>
-          <p><b>你会学到：</b>管理系统的架构：页面、数据和权限怎么拆；怎样用 MCP 让 AI 连接你的数据和工具。选最贴近你岗位的场景（Admin、HR、Sales、Marketing）练习。</p>
-        </div>
-      </li>
-      <li>
-        <span class="dot">5</span>
-        <div>
-          <h3><span class="ico ico--sm"><svg viewBox="0 0 24 24" aria-hidden="true"><use href="#i-scan"/></svg></span>制作 OCR 文件识别与数据提取工具</h3>
-          <p><b>你会学到：</b>OCR 文件识别和数据提取的流程、输出格式和校对方法，告别重复 key in。</p>
-        </div>
-      </li>
-      <li>
-        <span class="dot">6</span>
-        <div>
-          <h3><span class="ico ico--sm"><svg viewBox="0 0 24 24" aria-hidden="true"><use href="#i-chart"/></svg></span>建立企业数据 Dashboard 与报表系统</h3>
-          <p><b>你会学到：</b>数据怎么整理，图表和报表用什么格式，管理层才一眼看懂。</p>
+          <h3><span class="ico ico--sm"><svg viewBox="0 0 24 24" aria-hidden="true"><use href="#i-layout"/></svg></span>系统创建流程：为企业和各部门设计系统</h3>
+          <p><b>你会学到：</b>怎样设计适合自己公司或部门的系统来提升绩效：系统搭建的架构、安全措施，以及如何部署到线上，让同事真正用起来。</p>
         </div>
       </li>
       <li class="end">
-        <span class="dot">7</span>
+        <span class="dot">5</span>
         <div>
-          <h3><span class="ico ico--sm"><svg viewBox="0 0 24 24" aria-hidden="true"><use href="#i-rocket"/></svg></span>系统测试、Debug、修改与上线部署 <span class="mini-stamp">上线</span></h3>
-          <p><b>你会学到：</b>怎么测试、找错和修错，上线前要做哪些安全检查，以及怎么部署上线，还有哪些地方不能只靠 AI。</p>
+          <h3><span class="ico ico--sm"><svg viewBox="0 0 24 24" aria-hidden="true"><use href="#i-puzzle"/></svg></span>安装 Skills 和 MCP，并明白它们为什么重要</h3>
+          <p><b>你会学到：</b>什么是 Skill、什么是 MCP，怎样安装和使用，以及为什么它们能让 AI 更懂你的工作、连接你的数据和工具。</p>
         </div>
       </li>
     </ol>
@@ -1283,7 +1269,7 @@ footer .wrap{border-top:1px solid var(--line);padding-top:24px}
       <div class="worry" data-r>
         <span class="ico"><svg viewBox="0 0 24 24" aria-hidden="true"><use href="#i-alert"/></svg></span>
         <h3>“AI 写错了怎么办？系统出事谁负责？”</h3>
-        <p>AI 确实会出错，所以第 7 个模块专门教测试和 Debug。你会学到怎么检查、怎么修，也会知道哪些环节不能全交给 AI。</p>
+        <p>AI 确实会出错，所以课程会教你怎么测试、检查和修正，并讲解系统搭建的安全措施，也会知道哪些环节不能全交给 AI。</p>
       </div>
       <div class="worry" data-r>
         <span class="ico"><svg viewBox="0 0 24 24" aria-hidden="true"><use href="#i-lock"/></svg></span>
@@ -1317,7 +1303,7 @@ footer .wrap{border-top:1px solid var(--line);padding-top:24px}
     <div class="faq" data-r>
       <details name="faq">
         <summary>课程要上多久？一天怎么安排？</summary>
-        <div class="ans"><p>公开班是一天课程，周末上午 10 点到下午 6 点。一天里按顺序走完 7 个模块，从装好工具，到学会建立、测试和上线一个系统的方法。小班制，每班 12 人，老师在旁边带着做。</p></div>
+        <div class="ans"><p>公开班是一天课程，周末上午 10 点到下午 6 点。一天里走完 5 大主题：Dashboard、专业网站、OCR 手机扫描、系统创建流程，以及 Skills 和 MCP，学会设计、搭建和上线一个系统的方法。小班制，每班 12 人，老师在旁边带着做。</p></div>
       </details>
       <details name="faq">
         <summary>一天能学会做多少个系统？</summary>
@@ -1352,7 +1338,7 @@ footer .wrap{border-top:1px solid var(--line);padding-top:24px}
       </details>
       <details name="faq">
         <summary>上课前要准备什么？</summary>
-        <div class="ans"><p>自备一台能上网的笔记本电脑（Windows 或 Mac），以及一个 Claude 账号。第一个模块会带你一步步完成环境设置，不用事先装任何东西。</p></div>
+        <div class="ans"><p>自备一台能上网的笔记本电脑（Windows 或 Mac），以及一个 Claude 账号。上课时会带你一步步完成环境设置，不用事先装任何东西。</p></div>
       </details>
       <details name="faq">
         <summary>Claude Code 要另外付费吗？</summary>
@@ -1375,7 +1361,7 @@ footer .wrap{border-top:1px solid var(--line);padding-top:24px}
       </details>
       <details name="faq">
         <summary>我不是老板，只是 HR / Sales / 行政，适合吗？</summary>
-        <div class="ans"><p>适合。很多重复、耗时的工作，正好是你最了解，也最能用小工具解决的。课程的第 4 模块会按岗位选择练习场景。</p></div>
+        <div class="ans"><p>适合。很多重复、耗时的工作，正好是你最了解，也最能用小工具解决的。课程会按你的岗位选择练习场景。</p></div>
       </details>
       <details name="faq">
         <summary>开课日期、上课形式和学费是多少？</summary>
@@ -1464,7 +1450,7 @@ footer .wrap{border-top:1px solid var(--line);padding-top:24px}
   <div class="wrap final-grid">
    <div class="final-main">
     <h2 data-r>先把公司的第一个小系统做出来。</h2>
-    <p data-r>告诉我们你公司最想先解决的那一件事，我们会告诉你哪几个模块最适合你，以及下一期的安排。</p>
+    <p data-r>告诉我们你公司最想先解决的那一件事，我们会告诉你哪几个主题最适合你，以及下一期的安排。</p>
     <div class="actions" data-r>
       <a class="btn" data-wa href="#enroll">WhatsApp 咨询下一期</a>
       <a class="btn btn--ghost" href="#curriculum">再看一次课程内容</a>
@@ -1493,7 +1479,7 @@ footer .wrap{border-top:1px solid var(--line);padding-top:24px}
 <footer>
   <div class="wrap foot">
     <span>Shine On Digital · Claude Code 企业应用基础课程</span>
-    <span><a href="/automation-assistant/">自动化 + 小助理课程</a> · <a href="/articles/">数码营销文章</a> ·<a href="https://www.facebook.com/kgtey.official/reviews" target="_blank" rel="noopener">Facebook 学员评价</a></span>
+    <span><a href="/automation-assistant/">自动化 + 小助理课程</a> · <a href="/articles/">数码营销文章</a> · <a href="https://www.facebook.com/kgtey.official/reviews" target="_blank" rel="noopener">Facebook 学员评价</a></span>
   </div>
   <p class="disclaimer wrap">本课程为独立培训课程，与 Anthropic 无隶属关系。Claude 和 Claude Code 为 Anthropic 的商标。</p>
 </footer>
