@@ -4,7 +4,6 @@
 
 ## 目录
 - `index.html` — 首页（样式和脚本都在这个文件里）
-- `articles/` 与各篇文章目录 — 从旧 WordPress 迁移过来的 12 篇数码营销文章
 - `assets/photos/` — 压缩后的课堂照片；`assets/og-image.jpg` — 分享图
 - `robots.txt`、`sitemap.xml`、`llms.txt` — 搜索引擎与 AI 爬虫用
 - `vercel.json` — 缓存与旧网址 301 跳转；`.vercelignore` — 部署时排除原始照片

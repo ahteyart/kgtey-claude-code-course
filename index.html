@@ -343,7 +343,7 @@
 /* 深色岛：代码示范窗口、报名区、页脚 */
 .hud,.final,footer{--void:#141413;--panel:#1F1E1D;--line:#33312D;--line-hi:#4A4741;--text:#F0EEE6;--muted:#B0AEA5;--cyan:#D97757;--cyan-dim:rgba(217,119,87,.16);--btn:#D97757;--btn-ink:#141413;--chop:#FF7A5C;--ok:#6FD1A0;--warn:#E5B567}
 *{box-sizing:border-box;margin:0}
-html{scroll-behavior:smooth;scroll-padding-top:72px}
+html{scroll-behavior:smooth;scroll-padding-top:116px}
 body{font:400 17px/1.85 var(--sans);color:var(--text);background:var(--void);-webkit-font-smoothing:antialiased}
 html{overflow-x:clip}
 a{color:inherit}
@@ -387,6 +387,14 @@ h2{font-size:clamp(28px,4.2vw,48px);max-width:19em;text-wrap:balance}
 .fb-link:hover{transform:translateY(-1px);background:var(--cyan-dim)}
 .fb-link svg{width:18px;height:18px}
 .nav nav a{white-space:nowrap}
+/* 章节按钮 */
+.nav .subnav{border-top:1px solid var(--line);background:rgba(240,238,230,.55)}
+.nav .subnav .wrap{display:flex;flex-wrap:nowrap;justify-content:flex-start;align-items:center;gap:6px;min-height:46px;padding:0;overflow-x:auto;scrollbar-width:none}
+.nav .subnav .wrap::-webkit-scrollbar{display:none}
+.subnav a{flex:none;display:inline-flex;align-items:center;min-height:34px;padding:0 16px;border-radius:99px;font:500 15px/1 var(--sans);color:var(--muted);text-decoration:none;white-space:nowrap;transition:color .2s,background .2s}
+.subnav a:hover{color:var(--text);background:var(--cyan-dim)}
+.subnav a.on{color:var(--cyan);background:var(--cyan-dim);font-weight:700}
+
 @media(max-width:1180px){.nav nav>a:not(.btn):not(.fb-link){display:none}}
 /* 课程切换 */
 .cswitch{display:inline-flex;padding:3px;border:1px solid var(--line-hi);border-radius:99px;background:var(--panel);gap:2px}
@@ -887,15 +895,14 @@ footer .wrap{border-top:1px solid var(--line);padding-top:24px}
     <a class="brand" href="#top"><i></i>Shine On Digital<small>Claude Code 企业应用基础课程</small></a>
     <nav aria-label="主导航">
       <span class="cswitch" aria-label="选择课程"><a href="/" aria-current="page">Vibe Coding</a><a href="/automation-assistant/">自动化 + 小助理</a></span>
-      <a href="#teacher">关于老师</a>
-      <a href="#curriculum">课程内容</a>
-      <a href="#worries">常见担心</a>
-      <a href="#faq">FAQ</a>
       <a class="fb-link" href="https://www.facebook.com/kgtey.official" target="_blank" rel="noopener" aria-label="Facebook 专页"><svg viewBox="0 0 24 24" aria-hidden="true"><path fill="currentColor" d="M24 12.07C24 5.4 18.63 0 12 0S0 5.4 0 12.07C0 18.1 4.39 23.1 10.13 24v-8.44H7.08v-3.49h3.05V9.41c0-3.02 1.79-4.7 4.53-4.7 1.31 0 2.68.24 2.68.24v2.97h-1.51c-1.49 0-1.96.93-1.96 1.89v2.26h3.33l-.53 3.49h-2.8V24C19.61 23.1 24 18.1 24 12.07z"/></svg></a>
       <a class="btn" data-wa href="#enroll">WhatsApp 咨询</a>
     </nav>
     <button class="menu-btn" type="button" aria-expanded="false" aria-controls="menu"><span class="menu-ico" aria-hidden="true"></span><span class="menu-label">目录</span></button>
   </div>
+  <div class="subnav"><div class="wrap">
+    <a href="#teacher">关于老师</a><a href="#curriculum">课程内容</a><a href="#worries">常见担心</a><a href="#faq">FAQ</a>
+  </div></div>
   <div class="menu-sheet" id="menu" role="navigation" aria-label="页面目录">
     <div class="cswitch" aria-label="选择课程"><a href="/" aria-current="page">Vibe Coding</a><a href="/automation-assistant/">自动化 + 小助理</a></div>
     <ul>
@@ -903,6 +910,7 @@ footer .wrap{border-top:1px solid var(--line);padding-top:24px}
       <li><a class="m" href="#teacher">讲师 KG Tey</a></li>
       <li><a class="m" href="#overview">课程一览</a></li>
       <li><a class="m" href="#reviews">学员评价</a></li>
+      <li><a class="m" href="#worries">常见担心</a></li>
       <li><a class="m" href="#faq">常见问题 FAQ</a></li>
       <li><a class="m" href="#corporate">企业内训</a></li>
       <li><a class="m" href="#enroll">早鸟登记 RM100</a></li>
@@ -1479,7 +1487,7 @@ footer .wrap{border-top:1px solid var(--line);padding-top:24px}
 <footer>
   <div class="wrap foot">
     <span>Shine On Digital · Claude Code 企业应用基础课程</span>
-    <span><a href="/automation-assistant/">自动化 + 小助理课程</a> · <a href="/articles/">数码营销文章</a> · <a href="https://www.facebook.com/kgtey.official/reviews" target="_blank" rel="noopener">Facebook 学员评价</a></span>
+    <span><a href="/automation-assistant/">自动化 + 小助理课程</a> · <a href="https://www.facebook.com/kgtey.official/reviews" target="_blank" rel="noopener">Facebook 学员评价</a></span>
   </div>
   <p class="disclaimer wrap">本课程为独立培训课程，与 Anthropic 无隶属关系。Claude 和 Claude Code 为 Anthropic 的商标。</p>
 </footer>
@@ -1494,6 +1502,39 @@ document.querySelectorAll("[data-wa]").forEach(a=>{
   a.href = "https://wa.me/"+WA_NUMBER+"?text="+encodeURIComponent(a.dataset.waText || WA_TEXT);
   a.target = "_blank"; a.rel = "noopener";
 });
+
+/* 章节按钮：滚动时高亮当前章节 */
+(function(){
+  const links=[...document.querySelectorAll(".subnav a")];
+  const map=new Map(links.map(a=>[a.getAttribute("href").slice(1),a]));
+  const io=new IntersectionObserver(es=>es.forEach(e=>{
+    if(!e.isIntersecting)return;
+    links.forEach(a=>a.classList.remove("on"));
+    const a=map.get(e.target.id); if(a){a.classList.add("on");const box=a.parentElement; box.scrollTo({left:a.offsetLeft-(box.clientWidth-a.offsetWidth)/2,behavior:"smooth"})}
+  }),{rootMargin:"-30% 0px -60% 0px"});
+  map.forEach((a,id)=>{const el=document.getElementById(id); if(el)io.observe(el)});
+  /* 点击按钮：自己计算位置再滚动，比浏览器默认的锚点滚动更稳 */
+  const reduceMotion=matchMedia("(prefers-reduced-motion: reduce)").matches;
+  links.forEach(a=>a.addEventListener("click",e=>{
+    const el=document.getElementById(a.getAttribute("href").slice(1)); if(!el)return;
+    e.preventDefault();
+    history.replaceState(null,"","#"+el.id);
+    const hdr=document.querySelector("header.nav").offsetHeight;
+    const target=()=>Math.max(0,Math.round(el.getBoundingClientRect().top+window.scrollY-hdr+1));
+    const jump=y=>window.scrollTo({top:y,behavior:"instant"});
+    if(reduceMotion){jump(target());return}
+    const from=window.scrollY, t0=performance.now();
+    const dur=Math.min(1100,Math.max(450,Math.abs(target()-from)*0.22));
+    const stop=()=>{cancelAnimationFrame(raf);["wheel","touchstart","keydown"].forEach(t=>removeEventListener(t,stop))};
+    ["wheel","touchstart","keydown"].forEach(t=>addEventListener(t,stop,{passive:true}));
+    let raf;
+    (function step(now){
+      const p=Math.min(1,(now-t0)/dur), k=1-Math.pow(1-p,3);
+      jump(Math.round(from+(target()-from)*k));
+      if(p<1)raf=requestAnimationFrame(step); else{jump(target());stop()}
+    })(t0);
+  }));
+})();
 
 /* 早鸟登记：没有后台，资料通过 WhatsApp 预填信息发给老师 */
 (function(){

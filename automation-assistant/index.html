@@ -4,7 +4,7 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>AI 自动化 + 小助理课程｜Shine On Digital</title>
-<meta name="description" content="学会用 AI 自动发 FB Post、自动记录单据和 Invoice 到 Google Sheet，并用 Hermes Agent 为企业每个部门建立小助理。中文授课。">
+<meta name="description" content="学会用 AI 自动发 FB Post、自动记录单据和 Invoice 到 Google Sheet，并用 Hermes Agent 为企业每个部门建立小助理。两天课程，中文授课。">
 <link rel="canonical" href="https://shineondigital.com.my/automation-assistant/">
 <meta name="robots" content="index,follow,max-image-preview:large,max-snippet:-1">
 <meta name="author" content="KG Tey">
@@ -13,7 +13,7 @@
 <meta property="og:site_name" content="Shine On Digital">
 <meta property="og:locale" content="zh_CN">
 <meta property="og:title" content="AI 自动化 + 小助理课程｜Shine On Digital">
-<meta property="og:description" content="FB Post 自动化、单据自动记录、Hermes Agent 部门小助理。">
+<meta property="og:description" content="两天课程：FB Post 自动化、单据自动记录、Hermes Agent 部门小助理。">
 <meta property="og:url" content="https://shineondigital.com.my/automation-assistant/">
 <meta property="og:image" content="https://shineondigital.com.my/assets/og-image.jpg">
 <meta name="theme-color" content="#FAF9F5">
@@ -31,7 +31,7 @@
 }
 .final,footer,.dark{--void:#141413;--panel:#1F1E1D;--line:#33312D;--line-hi:#4A4741;--text:#F0EEE6;--muted:#B0AEA5;--cyan:#D97757;--cyan-dim:rgba(217,119,87,.16);--btn:#D97757;--btn-ink:#141413;--ok:#6FD1A0}
 *{box-sizing:border-box;margin:0}
-html{scroll-behavior:smooth;scroll-padding-top:72px;overflow-x:clip}
+html{scroll-behavior:smooth;scroll-padding-top:116px;overflow-x:clip}
 body{font:400 17px/1.85 var(--sans);color:var(--text);background:var(--void);-webkit-font-smoothing:antialiased}
 a{color:inherit}
 button{font:inherit;color:inherit}
@@ -251,6 +251,48 @@ h2{font-size:clamp(28px,4.2vw,46px);max-width:19em;text-wrap:balance}
 .card p{color:var(--muted);max-width:28em}
 @media(max-width:860px){.who3{grid-template-columns:1fr}}
 
+/* 章节按钮 */
+.nav .subnav{border-top:1px solid var(--line);background:rgba(240,238,230,.55)}
+.nav .subnav .wrap{display:flex;flex-wrap:nowrap;justify-content:flex-start;align-items:center;gap:6px;min-height:46px;padding:0;overflow-x:auto;scrollbar-width:none}
+.nav .subnav .wrap::-webkit-scrollbar{display:none}
+.subnav a{flex:none;display:inline-flex;align-items:center;min-height:34px;padding:0 16px;border-radius:99px;font:500 15px/1 var(--sans);color:var(--muted);text-decoration:none;white-space:nowrap;transition:color .2s,background .2s}
+.subnav a:hover{color:var(--text);background:var(--cyan-dim)}
+.subnav a.on{color:var(--cyan);background:var(--cyan-dim);font-weight:700}
+
+/* teacher */
+.teacher{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1fr);gap:clamp(28px,6vw,88px);align-items:start}
+.role-line{margin-top:10px;font-size:20px;font-weight:700;color:var(--cyan)}
+.creds{list-style:none;padding:0;margin-top:28px;border-top:1px solid var(--line-hi)}
+.creds li{position:relative;padding:13px 0 13px 26px;border-bottom:1px solid var(--line);font-weight:500}
+.creds li::before{content:"";position:absolute;left:4px;top:50%;width:7px;height:7px;margin-top:-3px;background:var(--cyan);transform:rotate(45deg)}
+.teacher-photo{position:relative;margin-bottom:24px;border-radius:8px;border:1px solid var(--line-hi);box-shadow:0 24px 60px rgba(60,40,20,.22)}
+.teacher-photo img{display:block;width:100%;aspect-ratio:4/3;object-fit:cover;object-position:60% 30%;border-radius:7px}
+.teacher-story{color:var(--muted);max-width:32em}
+.clients-title{margin-top:24px;color:var(--text);font-weight:700}
+.clients{list-style:none;padding:0;margin-top:10px;display:flex;flex-wrap:wrap;gap:6px 0}
+.clients li{display:inline-flex;align-items:center;gap:14px;padding-right:14px;color:var(--text)}
+.clients li::after{content:"";width:5px;height:5px;background:var(--cyan);transform:rotate(45deg);opacity:.6}
+.clients li:last-child::after{display:none}
+@media(max-width:860px){.teacher{grid-template-columns:1fr}}
+/* worries */
+.worries{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:0 clamp(28px,6vw,80px)}
+.worry{position:relative;padding:26px 0 32px}
+.worry::before{content:"";position:absolute;left:0;top:0;height:1px;width:100%;background:var(--line-hi)}
+.worry::after{content:"";position:absolute;left:0;top:-1px;height:3px;width:56px;background:var(--cyan)}
+.worry h3{font-family:var(--serif);font-size:clamp(18px,2.1vw,22px);margin-bottom:10px}
+.worry p{color:var(--muted);max-width:30em}
+@media(max-width:760px){.worries{grid-template-columns:1fr}}
+/* faq */
+.faq{max-width:820px;border-top:1px solid var(--line-hi)}
+.faq details{border-bottom:1px solid var(--line);transition:background .3s}
+.faq details[open]{background:linear-gradient(90deg,var(--cyan-dim),transparent 60%)}
+.faq summary{list-style:none;cursor:pointer;display:flex;justify-content:space-between;align-items:center;gap:20px;padding:22px 12px;font:700 clamp(17px,2vw,20px)/1.5 var(--serif)}
+.faq summary::-webkit-details-marker{display:none}
+.faq summary::after{content:"";flex:none;width:14px;height:14px;background:linear-gradient(var(--cyan),var(--cyan)) center/100% 2px no-repeat,linear-gradient(var(--cyan),var(--cyan)) center/2px 100% no-repeat;transition:transform .25s}
+.faq details[open] summary::after{transform:rotate(90deg);background:linear-gradient(var(--cyan),var(--cyan)) center/100% 2px no-repeat}
+.faq summary:hover{color:var(--cyan)}
+.faq .ans{padding:0 12px 24px;color:var(--muted);max-width:34em}
+
 /* final + footer */
 .final{position:relative;overflow:hidden;padding:clamp(72px,10vw,128px) 0;color:var(--text);background:radial-gradient(50% 70% at 80% 100%,rgba(217,119,87,.28),transparent 70%),radial-gradient(45% 60% at 8% 0%,rgba(130,168,115,.22),transparent 70%),var(--void)}
 .final .wrap{position:relative;z-index:1}
@@ -288,6 +330,9 @@ footer .disclaimer.wrap{border-top:0;padding-top:0}
       <a class="btn" data-wa href="#enroll">WhatsApp 咨询</a>
     </nav>
   </div>
+  <div class="subnav"><div class="wrap">
+    <a href="#teacher">关于老师</a><a href="#learn">课程内容</a><a href="#worries">常见担心</a><a href="#faq">FAQ</a>
+  </div></div>
 </header>
 
 <main>
@@ -297,13 +342,14 @@ footer .disclaimer.wrap{border-top:0;padding-top:0}
     <div>
       <p class="course-name">AI 自动化 + 小助理课程</p>
       <h1>让 AI 替你<em>发帖</em>、<em>记单据</em>，再为每个部门配一个小助理。</h1>
-      <p class="sub">学会把每天重复的工作<b>自动化</b>，并为企业的每个部门建立专属的 <b>AI 小助理</b>，自动处理工作、汇报进度。不需要编程基础，中文授课。</p>
+      <p class="sub">学会把每天重复的工作<b>自动化</b>，并为企业的每个部门建立专属的 <b>AI 小助理</b>，自动处理工作、汇报进度。<b>两天课程</b>，不需要编程基础，中文授课。</p>
       <div class="actions">
         <a class="btn" data-wa href="#enroll">WhatsApp 咨询课程</a>
         <a class="btn btn--ghost" href="#learn">看看学什么</a>
         <a class="btn btn--ghost" href="/">← Vibe Coding 课程</a>
       </div>
       <ul class="facts">
+        <li>两天课程</li>
         <li>FB Post 自动化</li>
         <li>单据 / Invoice 自动记录</li>
         <li>Hermes Agent 部门小助理</li>
@@ -379,7 +425,7 @@ footer .disclaimer.wrap{border-top:0;padding-top:0}
   <div class="wrap">
     <div class="sec-head rv">
       <h2>课程纲要：3 个能马上用在生意上的自动化。</h2>
-      <p class="lede">从发帖、单据到部门汇报，把每天重复的事交给 AI。点“看示范”，上面的画面会播放对应的自动化。</p>
+      <p class="lede">两天课程，从发帖、单据到部门汇报，把每天重复的事交给 AI。点“看示范”，上面的画面会播放对应的自动化。</p>
     </div>
     <div class="grid">
       <article class="topic rv">
@@ -471,6 +517,61 @@ footer .disclaimer.wrap{border-top:0;padding-top:0}
   </div>
 </section>
 
+<section class="sec" id="teacher">
+  <div class="wrap teacher">
+    <div class="rv">
+      <h2>你的老师：KG Tey</h2>
+      <p class="role-line">企业规划师</p>
+      <ul class="creds">
+        <li>17 年多媒体设计讲师经验</li>
+        <li>培育超过 1,500 位学生</li>
+        <li>马来西亚 HRDC 认证讲师</li>
+        <li>台湾认证策略品牌管理</li>
+        <li>曾获亚洲中文广告及数码设计优异奖</li>
+        <li>Google Gemini AI 认证教师</li>
+        <li>曾荣获南方大学最佳讲师荣誉</li>
+        <li>宽柔中学（Foon Yew High School）夜间部 AI 培训讲师</li>
+      </ul>
+    </div>
+    <div class="teacher-story rv" style="--d:.12s">
+      <figure class="teacher-photo"><img src="/assets/photos/teacher.jpg" alt="KG Tey 老师在课堂上用笔记本电脑演示" loading="lazy"></figure>
+      <p>2007 年创立科技公司，并创办马来西亚创意窝艺术文化品牌。这些年来，他协助各类企业运用网络营销与大数据，提升品牌知名度和销售业绩。</p>
+      <p class="clients-title">曾协助的企业包括</p>
+      <ul class="clients"><li>Doraemon 100 活动</li><li>Chatime</li><li>Julie’s</li><li>SP Setia</li><li>EcoWorld</li><li>海鸥集团</li><li>Zero Healthcare</li></ul>
+    </div>
+  </div>
+</section>
+
+<section class="sec sec--panel" id="worries">
+  <div class="wrap">
+    <div class="sec-head rv">
+      <h2>报名前，你可能会担心。</h2>
+    </div>
+    <div class="worries">
+      <div class="worry rv"><h3>“我完全不懂技术，学得会吗？”</h3><p>课程为没有编程基础的人设计，用中文就能操作。遇到不懂的词，会用办公室里的例子解释。</p></div>
+      <div class="worry rv" style="--d:.1s"><h3>“自动发帖，会不会发出我不想要的内容？”</h3><p>课程会教你怎样设定内容方向，并保留检查和确认的环节，让发布的内容由你把关。</p></div>
+      <div class="worry rv"><h3>“单据格式五花八门，会不会读错？”</h3><p>AI 难免会有出错的时候，所以课程会教你怎样检查和校对记录下来的资料，重要的数字也要懂得抽查。</p></div>
+      <div class="worry rv" style="--d:.1s"><h3>“公司的资料交给 AI，安全吗？”</h3><p>课程会讲解哪些资料不应该放进 AI 工具，以及使用小助理时要注意的基本安全做法。</p></div>
+    </div>
+  </div>
+</section>
+
+<section class="sec" id="faq">
+  <div class="wrap">
+    <div class="sec-head rv">
+      <h2>常见问题 FAQ</h2>
+    </div>
+    <div class="faq rv">
+      <details><summary>课程要上多久？</summary><div class="ans"><p>自动化 + 小助理是两天课程。</p></div></details>
+      <details><summary>开课日期、上课形式和学费是多少？</summary><div class="ans"><p>这是一门两天的课程。具体的开课日期、上课形式和学费，请 WhatsApp 咨询，我们会告诉你最新的安排。</p></div></details>
+      <details><summary>我没有编程基础，可以上吗？</summary><div class="ans"><p>可以。课程是为没有编程基础的人设计的，用中文就能上手。</p></div></details>
+      <details><summary>Vibe Coding 和自动化 + 小助理，我该选哪一门？</summary><div class="ans"><p>Vibe Coding 教你做 Dashboard、网站和 OCR 系统；自动化 + 小助理教你自动发 FB Post、自动记录单据，以及建立部门小助理。不确定的话，WhatsApp 告诉我们你最想解决的事，我们会给你建议。</p></div></details>
+      <details><summary>我们公司想请老师做内部培训，可以吗？</summary><div class="ans"><p>可以。我们提供企业 AI 培训，内容可以按你们公司的需要调整，请 WhatsApp 说明人数和需求。</p></div></details>
+      <details><summary>上课前需要准备什么？</summary><div class="ans"><p>报名时我们会告诉你需要准备的设备和账号，请 WhatsApp 咨询。</p></div></details>
+    </div>
+  </div>
+</section>
+
 <section class="final" id="enroll">
   <div class="float f1" aria-hidden="true"></div><div class="float f2" aria-hidden="true"></div><div class="float f3" aria-hidden="true"></div>
   <div class="wrap">
@@ -487,7 +588,7 @@ footer .disclaimer.wrap{border-top:0;padding-top:0}
 <footer>
   <div class="wrap foot">
     <span>Shine On Digital · AI 自动化 + 小助理课程</span>
-    <span><a href="/">Vibe Coding 课程</a> · <a href="/articles/">数码营销文章</a></span>
+    <span><a href="/">Vibe Coding 课程</a></span>
   </div>
   <p class="disclaimer wrap">本课程为独立培训课程，与 Anthropic 无隶属关系。Claude 为 Anthropic 的商标。页面中的示范画面使用示例数据。</p>
 </footer>
@@ -502,6 +603,39 @@ document.querySelectorAll("[data-wa]").forEach(a=>{
 
 const $ = (s,r=document)=>r.querySelector(s), $$ = (s,r=document)=>[...r.querySelectorAll(s)];
 const reduce = matchMedia("(prefers-reduced-motion: reduce)").matches;
+
+/* 章节按钮：滚动时高亮当前章节 */
+(function(){
+  const links=[...document.querySelectorAll(".subnav a")];
+  const map=new Map(links.map(a=>[a.getAttribute("href").slice(1),a]));
+  const io=new IntersectionObserver(es=>es.forEach(e=>{
+    if(!e.isIntersecting)return;
+    links.forEach(a=>a.classList.remove("on"));
+    const a=map.get(e.target.id); if(a){a.classList.add("on");const box=a.parentElement; box.scrollTo({left:a.offsetLeft-(box.clientWidth-a.offsetWidth)/2,behavior:"smooth"})}
+  }),{rootMargin:"-30% 0px -60% 0px"});
+  map.forEach((a,id)=>{const el=document.getElementById(id); if(el)io.observe(el)});
+  /* 点击按钮：自己计算位置再滚动，比浏览器默认的锚点滚动更稳 */
+  const reduceMotion=matchMedia("(prefers-reduced-motion: reduce)").matches;
+  links.forEach(a=>a.addEventListener("click",e=>{
+    const el=document.getElementById(a.getAttribute("href").slice(1)); if(!el)return;
+    e.preventDefault();
+    history.replaceState(null,"","#"+el.id);
+    const hdr=document.querySelector("header.nav").offsetHeight;
+    const target=()=>Math.max(0,Math.round(el.getBoundingClientRect().top+window.scrollY-hdr+1));
+    const jump=y=>window.scrollTo({top:y,behavior:"instant"});
+    if(reduceMotion){jump(target());return}
+    const from=window.scrollY, t0=performance.now();
+    const dur=Math.min(1100,Math.max(450,Math.abs(target()-from)*0.22));
+    const stop=()=>{cancelAnimationFrame(raf);["wheel","touchstart","keydown"].forEach(t=>removeEventListener(t,stop))};
+    ["wheel","touchstart","keydown"].forEach(t=>addEventListener(t,stop,{passive:true}));
+    let raf;
+    (function step(now){
+      const p=Math.min(1,(now-t0)/dur), k=1-Math.pow(1-p,3);
+      jump(Math.round(from+(target()-from)*k));
+      if(p<1)raf=requestAnimationFrame(step); else{jump(target());stop()}
+    })(t0);
+  }));
+})();
 
 /* 滚动进度条 */
 (function(){
