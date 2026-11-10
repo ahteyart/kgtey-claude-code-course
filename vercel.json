@@ -1,0 +1,179 @@
+{
+  "trailingSlash": true,
+  "redirects": [
+    {
+      "source": "/luzhoulaojiao",
+      "destination": "/",
+      "permanent": true
+    },
+    {
+      "source": "/homepage",
+      "destination": "/",
+      "permanent": true
+    },
+    {
+      "source": "/my-account",
+      "destination": "/",
+      "permanent": true
+    },
+    {
+      "source": "/checkout",
+      "destination": "/",
+      "permanent": true
+    },
+    {
+      "source": "/cart",
+      "destination": "/",
+      "permanent": true
+    },
+    {
+      "source": "/shop",
+      "destination": "/",
+      "permanent": true
+    },
+    {
+      "source": "/terms-and-conditions",
+      "destination": "/",
+      "permanent": true
+    },
+    {
+      "source": "/thank-you",
+      "destination": "/",
+      "permanent": true
+    },
+    {
+      "source": "/knowledge-base",
+      "destination": "/",
+      "permanent": true
+    },
+    {
+      "source": "/affiliate-home",
+      "destination": "/",
+      "permanent": true
+    },
+    {
+      "source": "/affiliate-home/affiliate-login",
+      "destination": "/",
+      "permanent": true
+    },
+    {
+      "source": "/affiliate-home/affiliate-register",
+      "destination": "/",
+      "permanent": true
+    },
+    {
+      "source": "/online-marketing-course",
+      "destination": "/",
+      "permanent": true
+    },
+    {
+      "source": "/luzhoulaojiao/",
+      "destination": "/",
+      "permanent": true
+    },
+    {
+      "source": "/homepage/",
+      "destination": "/",
+      "permanent": true
+    },
+    {
+      "source": "/my-account/",
+      "destination": "/",
+      "permanent": true
+    },
+    {
+      "source": "/checkout/",
+      "destination": "/",
+      "permanent": true
+    },
+    {
+      "source": "/cart/",
+      "destination": "/",
+      "permanent": true
+    },
+    {
+      "source": "/shop/",
+      "destination": "/",
+      "permanent": true
+    },
+    {
+      "source": "/terms-and-conditions/",
+      "destination": "/",
+      "permanent": true
+    },
+    {
+      "source": "/thank-you/",
+      "destination": "/",
+      "permanent": true
+    },
+    {
+      "source": "/knowledge-base/",
+      "destination": "/",
+      "permanent": true
+    },
+    {
+      "source": "/affiliate-home/",
+      "destination": "/",
+      "permanent": true
+    },
+    {
+      "source": "/affiliate-home/affiliate-login/",
+      "destination": "/",
+      "permanent": true
+    },
+    {
+      "source": "/affiliate-home/affiliate-register/",
+      "destination": "/",
+      "permanent": true
+    },
+    {
+      "source": "/online-marketing-course/",
+      "destination": "/",
+      "permanent": true
+    },
+    {
+      "source": "/category/:path*",
+      "destination": "/articles/",
+      "permanent": true
+    },
+    {
+      "source": "/tag/:path*",
+      "destination": "/articles/",
+      "permanent": true
+    },
+    {
+      "source": "/feed",
+      "destination": "/articles/",
+      "permanent": true
+    },
+    {
+      "source": "/feed/",
+      "destination": "/articles/",
+      "permanent": true
+    }
+  ],
+  "headers": [
+    {
+      "source": "/assets/(.*)",
+      "headers": [
+        {
+          "key": "Cache-Control",
+          "value": "public, max-age=604800, stale-while-revalidate=86400"
+        }
+      ]
+    },
+    {
+      "source": "/(.*)",
+      "headers": [
+        {
+          "key": "X-Content-Type-Options",
+          "value": "nosniff"
+        },
+        {
+          "key": "Referrer-Policy",
+          "value": "strict-origin-when-cross-origin"
+        }
+      ]
+    }
+  ]
+}
