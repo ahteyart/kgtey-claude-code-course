@@ -4,7 +4,8 @@
 
 ## 一次性设置（约 5 分钟）
 
-1. 打开 Google Sheet「Invoice Form Responses 发票表单回复」（分页「课程报名 Registration」已经建好）。
+1. 打开 Google Drive：Company → Shine on Digital → 课程报名 Registration → Sheet「课程报名 Registration 2026」
+   https://docs.google.com/spreadsheets/d/1pPwhuKpCNG1wmw9vk_pIYFk21Q_kPKlxXjLCk-FJVjk/edit
 2. 点菜单 **扩展程序 (Extensions) → Apps Script**。
 3. 删掉编辑器里原有的代码，把 `register.gs` 的全部内容贴进去，按 **保存**。
 4. 点右上角 **部署 (Deploy) → 新部署 (New deployment)**：
@@ -16,9 +17,9 @@
 7. 打开 `register/index.html`，找到 `const SCRIPT_URL = "";`，把网址贴进引号里，然后重新部署网站。
 
 ## 资料存在哪里
-- 资料：同一份 Sheet 的新分页 **「课程报名 Registration」**（第一次有人提交时自动建立）。不会动到「Form Responses 1」。
-- 转账单：你的 Google Drive 里的 **「课程报名 Bank Slips」** 文件夹。
-- 「处理状态」栏默认是「待核对」，核对付款后可以自己改。
+- 资料：Sheet「课程报名 Registration 2026」（Company / Shine on Digital / 课程报名 Registration）
+- 转账单：同一个文件夹里的「Bank Slips 银行转账单」
+- 「处理状态」栏默认是「待核对」，核对付款后可以从下拉选单改。
 
 ## 以后改了脚本
 改完要 **部署 → 管理部署 → 编辑（铅笔）→ 版本选「新版本」→ 部署**，网址不会变。

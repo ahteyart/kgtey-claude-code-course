@@ -1,16 +1,16 @@
 /**
  * Shine On Digital 课程报名 — 接收 /register/ 页面提交的资料
  *
- * 资料写进这份 Google Sheet 的「课程报名 Registration」分页（没有会自动建立），
- * 银行转账单存进 Google Drive 的「课程报名 Bank Slips」文件夹（没有会自动建立）。
- * 不会改动「Form Responses 1」分页。
+ * Google Drive：Company / Shine on Digital / 课程报名 Registration /
+ *   - 资料写进 Sheet「课程报名 Registration 2026」
+ *   - 银行转账单存进文件夹「Bank Slips 银行转账单」
  *
  * 部署步骤见 apps-script/README.md
  */
 
-const SHEET_ID = '1Wm2VuihEIeqGMXSIhDbXil2P3VezTiHt7CK4Jtw1Hf4';
+const SHEET_ID = '1pPwhuKpCNG1wmw9vk_pIYFk21Q_kPKlxXjLCk-FJVjk';   // 课程报名 Registration 2026
+const FOLDER_ID = '1ErgYyjw08BTia7DecjBr94jzlwvcF5vo';             // Bank Slips 银行转账单
 const SHEET_NAME = '课程报名 Registration';
-const FOLDER_NAME = '课程报名 Bank Slips';
 const MAX_BYTES = 8 * 1024 * 1024; // 8MB
 const ALLOWED = ['image/jpeg', 'image/png', 'image/webp', 'image/heic', 'image/heif', 'application/pdf'];
 const HEADERS = ['提交时间', '报名编号', '姓名', '公司名称', '联系号码', '行业', '电邮',
@@ -49,9 +49,8 @@ function doPost(e) {
     const tz = Session.getScriptTimeZone() || 'Asia/Kuala_Lumpur';
     const now = new Date();
     const id = 'REG-' + Utilities.formatDate(now, tz, 'yyMMdd') + '-' + String(sh.getLastRow()).padStart(3, '0');
-    sh.getRange('A:A').setNumberFormat('yyyy-mm-dd hh:mm');
 
-    const folder = getFolder();
+    const folder = DriveApp.getFolderById(FOLDER_ID);
     const ext = (String(d.file.name || '').match(/\.[a-z0-9]{2,5}$/i) || [''])[0];
     const safeName = clean(d.name).replace(/[\\\/:*?"<>|]/g, '').slice(0, 40);
     const blob = Utilities.newBlob(bytes, mime, id + ' ' + safeName + ext);
@@ -74,11 +73,6 @@ function doPost(e) {
 
 function doGet() {
   return json({ ok: true, service: 'shineondigital-register' });
-}
-
-function getFolder() {
-  const it = DriveApp.getFoldersByName(FOLDER_NAME);
-  return it.hasNext() ? it.next() : DriveApp.createFolder(FOLDER_NAME);
 }
 
 // 防止公式注入（以 = + - @ 开头的内容在 Sheet 里会被当公式）
