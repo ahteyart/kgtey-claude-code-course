@@ -72,7 +72,7 @@ input:focus-visible,select:focus-visible,textarea:focus-visible{outline:2px soli
 .choice input:disabled+span{opacity:.45;text-decoration:line-through;cursor:not-allowed}
 .choice input:focus-visible+span{outline:2px solid var(--accent);outline-offset:2px}
 
-.stepper{display:inline-flex;align-items:stretch;border:1px solid var(--line-hi);border-radius:8px;overflow:hidden;background:var(--card)}
+.stepper{display:inline-flex;margin-top:2px;align-items:stretch;border:1px solid var(--line-hi);border-radius:8px;overflow:hidden;background:var(--card)}
 .stepper button{width:48px;border:0;background:var(--panel);color:var(--text);font:700 22px/1 var(--sans);cursor:pointer}
 .stepper button:active{background:var(--line)}
 .stepper input{width:110px;min-height:46px;border:0;border-inline:1px solid var(--line-hi);border-radius:0;background:var(--card);text-align:center;font:700 17px/1 var(--sans);-moz-appearance:textfield}
@@ -156,9 +156,12 @@ footer{margin-top:56px;padding:28px 0 40px;border-top:1px solid var(--line);colo
 
     <section class="section" aria-labelledby="s2">
       <h2 id="s2"><span class="n">2</span>选择课程</h2>
-      <p class="hint">选好上课日期就会自动勾选课程。可以同时报两个课程。</p>
+      <p class="hint">选好上课日期就会自动勾选课程。可以只报一个，也可以两个都报。</p>
 
       <div id="courses"></div>
+
+      <label class="legend" for="f-pax">报名人数 <i>（两个课程都报，就是同一批人上）</i></label>
+      <div class="stepper"><button type="button" data-step="-1" aria-label="减少人数">−</button><input id="f-pax" name="pax" type="number" inputmode="numeric" min="1" step="1" placeholder="选择人数"><button type="button" data-step="1" aria-label="增加人数">+</button></div>
       <div id="others" hidden>
         <p class="who">第 1 位学员就是上面填的联系人。请填写其他学员的资料（开 invoice 用）：</p>
         <div id="other-fields"></div>
@@ -231,21 +234,20 @@ const MAX_BYTES = 8 * 1024 * 1024;
       '<span><span class="t">'+esc(c.name)+'</span><span class="meta">'+esc(c.note||"")+'</span></span>'+
       '<span class="price" id="p-'+c.id+'"></span></label>'+
       '<div class="opts"><span class="legend" id="ld-'+c.id+'">上课日期'+(c.dates.length>1?' <i>（'+c.dates.length+' 选 1）</i>':'')+'</span>'+
-      '<div class="choices" role="radiogroup" aria-labelledby="ld-'+c.id+'">'+(dates||'<span class="hint">日期待定</span>')+'</div>'+
-      '<label class="legend" for="f-pax-'+c.id+'">人数</label>'+
-      '<div class="stepper"><button type="button" data-step="-1" data-for="'+c.id+'" aria-label="减少人数">−</button>'+
-      '<input id="f-pax-'+c.id+'" name="pax-'+c.id+'" type="number" inputmode="numeric" min="1" max="'+c.maxPax+'" step="1" placeholder="选择人数">'+
-      '<button type="button" data-step="1" data-for="'+c.id+'" aria-label="增加人数">+</button></div></div></div>';
+      '<div class="choices" role="radiogroup" aria-labelledby="ld-'+c.id+'">'+(dates||'<span class="hint">日期待定</span>')+'</div></div></div>';
   }).join("");
 
   const box = c => f.elements["course-"+c.id];
-  const paxEl = c => f.elements["pax-"+c.id];
+  const paxEl = f.elements.pax;
+  const MAX_PAX = Math.max(1, ...COURSES.map(c=>c.maxPax));
+  paxEl.max = MAX_PAX;
   const picked = c => box(c) && box(c).checked;
   const dateOf = c => { const r = f.querySelector('input[name="date-'+c.id+'"]:checked'); return r ? r.value : ""; };
-  const paxOf = c => { const n = parseInt(paxEl(c).value, 10); return n >= 1 ? Math.min(n, c.maxPax) : 0; };
+  const pax = () => { const n = parseInt(paxEl.value, 10); return n >= 1 ? Math.min(n, MAX_PAX) : 0; };
+  const paxOf = () => pax();
   const priceOf = c => { const n = paxOf(c); return n === 0 ? 0 : n === 1 ? c.price : c.groupPrice * n; };
   const amount = () => COURSES.reduce((t,c)=>t + (picked(c) ? priceOf(c) : 0), 0);
-  const headcount = () => COURSES.reduce((m,c)=>picked(c) ? Math.max(m, paxOf(c)) : m, 0);
+  const headcount = () => COURSES.some(picked) ? pax() : 0;
   const NTH = ["","一","二","三","四","五","六","七","八","九","十"];
   const kept = {};
   function drawOthers(){
@@ -278,22 +280,21 @@ const MAX_BYTES = 8 * 1024 * 1024;
   /* 人数 − / + 按钮 */
   f.addEventListener("click", e=>{
     const b = e.target.closest("[data-step]"); if(!b) return;
-    const c = COURSES.find(x=>x.id===b.dataset.for), el = paxEl(c);
-    el.value = Math.max(1, Math.min(c.maxPax, (paxOf(c) || 0) + +b.dataset.step));
-    el.dispatchEvent(new Event("change", { bubbles:true }));
+    paxEl.value = Math.max(1, Math.min(MAX_PAX, pax() + +b.dataset.step));
+    paxEl.dispatchEvent(new Event("change", { bubbles:true }));
   });
-  f.addEventListener("input", e=>{ if(/^pax-/.test(e.target.name)) e.target.dispatchEvent(new Event("change", { bubbles:true })); });
+  f.addEventListener("input", e=>{ if(e.target === paxEl) e.target.dispatchEvent(new Event("change", { bubbles:true })); });
   f.addEventListener("change", e=>{
+    if(e.target === paxEl && paxEl.value !== "" && pax() !== +paxEl.value) paxEl.value = pax() || "";   // 超出范围 → 拉回
     if(/^s\d+$/.test(e.target.name)){ const co = e.target.closest(".person").querySelector(".co"); co.hidden = e.target.checked; if(!co.hidden) co.querySelector("input").focus(); return; }
     const card = e.target.closest(".course"); 
     if(card){
       const c = COURSES.find(x=>x.id===card.dataset.id);
-      if(e.target.name === "pax-"+c.id && e.target.value !== "" && paxOf(c) !== +e.target.value) e.target.value = paxOf(c) || "";   // 超出范围 → 拉回
-      if((e.target.name === "date-"+c.id || e.target.name === "pax-"+c.id) && e.target.value !== "") box(c).checked = true;   // 选日期/人数 → 自动勾选课程
+      if(e.target.name === "date-"+c.id) box(c).checked = true;   // 选日期 → 自动勾选课程
       if(e.target === box(c)){
         const open = [...f.querySelectorAll('input[name="date-'+c.id+'"]:not(:disabled)')];
         if(box(c).checked && open.length === 1) open[0].checked = true;                          // 只有一个日期就自动选
-        if(!box(c).checked){ open.forEach(r=>r.checked = false); paxEl(c).value = ""; }           // 取消勾选 → 清掉日期和人数
+        if(!box(c).checked) open.forEach(r=>r.checked = false);                                   // 取消勾选 → 清掉日期
       }
     }
     refresh();
@@ -367,8 +368,8 @@ const MAX_BYTES = 8 * 1024 * 1024;
     if(v("email") && !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(v("email"))) return fail(f.elements.email, "电邮格式不对，可以留空。");
     const chosen = COURSES.filter(picked);
     if(!chosen.length) return fail(f.querySelector(".course input"), "请至少选择一个课程。");
-    for(const c of chosen){ if(!paxOf(c)) return fail(paxEl(c), "请选择「"+c.name+"」的人数。"); }
     for(const c of chosen){ if(!dateOf(c)) return fail(f.querySelector('input[name="date-'+c.id+'"]:not(:disabled)'), "请选择「"+c.name+"」的上课日期。"); }
+    if(!pax()) return fail(paxEl, "请选择报名人数。");
     const others = [];
     const okPhone = t => /^[+\d][\d\s\-()+]*$/.test(t) && t.replace(/\D/g,"").length >= 9 && t.replace(/\D/g,"").length <= 15;
     for(let i=2;i<=headcount();i++){
@@ -382,12 +383,12 @@ const MAX_BYTES = 8 * 1024 * 1024;
     const file = slip.files[0];
     if(!file) return fail(slip, "请上传银行转账单。");
 
-    const courses = chosen.map(c=>c.name+"（"+paxOf(c)+" 人）");
+    const courses = chosen.map(c=>c.name);
     const dates = chosen.map(c=>c.name+"："+dateOf(c));
     const d = {
       name:v("name"), company:v("company"), phone, industry:v("industry"), email:v("email"),
       courses, courseText:courses.join(" + "), dateText:dates.join("；"),
-      pax: chosen.map(c=>c.name+" "+paxOf(c)+" 人").join("；"), others,
+      pax: pax() + " 人", others,
       amount: amount(), note:v("note"), website:v("website")
     };
 
