@@ -8,7 +8,7 @@
      name:  "课程名称",
      note:  "课程名称下面的小字说明",
      dates: [ "日期 1", "日期 2", ... ],     ← 学员从这里选一个
-     prices: [ { pax: 1, price: 850 }, ... ] ← 人数和价钱（RM）
+     prices: [ { pax: 1, price: 890 }, ... ] ← 人数和价钱（RM）
    }
 
    · 加日期：在 dates 里多加一行，例如 "20/1（二）10AM–6PM",
@@ -29,7 +29,7 @@ window.COURSES = [
       "14/12（一）10AM–6PM",
     ],
     prices: [
-      { pax: 1, price: 850 },
+      { pax: 1, price: 890 },
       { pax: 2, price: 1500 },
     ],
   },
