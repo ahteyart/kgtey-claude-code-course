@@ -14,7 +14,7 @@ const SHEET_NAME = '课程报名 Registration';
 const MAX_BYTES = 8 * 1024 * 1024; // 8MB
 const ALLOWED = ['image/jpeg', 'image/png', 'image/webp', 'image/heic', 'image/heif', 'application/pdf'];
 const HEADERS = ['提交时间', '报名编号', '姓名', '公司名称', '联系号码', '行业', '电邮',
-  '课程', '上课日期', '人数', '第二位学员姓名', '应付金额 (RM)', '银行转账单', '备注', '处理状态'];
+  '课程', '上课日期', '人数', '第二位学员', '第三位学员', '第四位学员', '应付金额 (RM)', '银行转账单', '备注', '处理状态'];
 
 function doPost(e) {
   const lock = LockService.getScriptLock();
@@ -58,7 +58,7 @@ function doPost(e) {
 
     sh.appendRow([
       now, id, clean(d.name), clean(d.company), "'" + clean(d.phone), clean(d.industry), clean(d.email),
-      clean(d.courseText), clean(d.dateText), clean(d.pax), clean(d.name2), Number(d.amount) || '',
+      clean(d.courseText), clean(d.dateText), clean(d.pax), clean((d.others||[])[0]), clean((d.others||[])[1]), clean((d.others||[])[2]), Number(d.amount) || '',
       file.getUrl(), clean(d.note), '待核对'
     ]);
 

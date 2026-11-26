@@ -72,7 +72,8 @@ input:focus-visible,select:focus-visible,textarea:focus-visible{outline:2px soli
 .choice input:disabled+span{opacity:.45;text-decoration:line-through;cursor:not-allowed}
 .choice input:focus-visible+span{outline:2px solid var(--accent);outline-offset:2px}
 
-#second{margin-top:4px}
+#others{margin-top:4px}
+#others .who{margin-top:18px;color:var(--muted);font-size:14px}
 .total{display:flex;justify-content:space-between;align-items:baseline;gap:12px;margin-top:20px;padding-top:16px;border-top:1px dashed var(--line-hi)}
 .total b{font:700 26px/1 var(--sans);color:var(--accent)}
 
@@ -146,9 +147,9 @@ footer{margin-top:56px;padding:28px 0 40px;border-top:1px solid var(--line);colo
       <p class="hint">选好上课日期就会自动勾选课程。可以同时报两个课程。</p>
 
       <div id="courses"></div>
-      <div id="second" hidden>
-        <label for="f-name2">第二位学员姓名</label>
-        <input id="f-name2" name="name2" type="text" maxlength="60" placeholder="例如：林美玲">
+      <div id="others" hidden>
+        <p class="who">第 1 位学员就是上面填的联系人。请填写其他学员的姓名：</p>
+        <div id="other-fields"></div>
       </div>
 
       <div class="total"><span>应付金额</span><b id="total">RM0</b></div>
@@ -229,14 +230,24 @@ const MAX_BYTES = 8 * 1024 * 1024;
   const paxOf = c => { const r = f.querySelector('input[name="pax-'+c.id+'"]:checked'); return r ? +r.value : (c.prices[0]||{pax:1}).pax; };
   const priceOf = c => { const p = c.prices.find(p=>p.pax===paxOf(c)) || c.prices[0]; return p ? p.price : 0; };
   const amount = () => COURSES.reduce((t,c)=>t + (picked(c) ? priceOf(c) : 0), 0);
-  const needName2 = () => COURSES.some(c=>picked(c) && paxOf(c) >= 2);
+  const headcount = () => COURSES.reduce((m,c)=>picked(c) ? Math.max(m, paxOf(c)) : m, 0);
+  const NTH = ["","一","二","三","四","五","六","七","八","九","十"];
+  const kept = {};
+  function drawOthers(){
+    const n = headcount(), box = $("other-fields");
+    box.querySelectorAll("input").forEach(i=>kept[i.name]=i.value);
+    let h = "";
+    for(let i=2;i<=n;i++) h += '<label for="f-p'+i+'">第'+(NTH[i]||i)+'位学员姓名</label><input id="f-p'+i+'" name="p'+i+'" type="text" maxlength="60" autocomplete="off" value="'+esc(kept["p"+i]||"")+'">';
+    if(box.dataset.n !== String(n)){ box.innerHTML = h; box.dataset.n = n; }
+    $("others").hidden = n < 2;
+  }
 
   function refresh(){
     COURSES.forEach(c=>{
       $("c-"+c.id).classList.toggle("on", picked(c));
       $("p-"+c.id).textContent = fmt(priceOf(c));
     });
-    $("second").hidden = !needName2();
+    drawOthers();
     const a = amount();
     $("total").textContent = fmt(a);
     $("total2").textContent = a ? fmt(a) : "上面的应付金额";
@@ -324,7 +335,8 @@ const MAX_BYTES = 8 * 1024 * 1024;
     const chosen = COURSES.filter(picked);
     if(!chosen.length) return fail(f.querySelector(".course input"), "请至少选择一个课程。");
     for(const c of chosen){ if(!dateOf(c)) return fail(f.querySelector('input[name="date-'+c.id+'"]:not(:disabled)'), "请选择「"+c.name+"」的上课日期。"); }
-    if(needName2() && v("name2").length < 2) return fail(f.elements.name2, "请填写第二位学员的姓名。");
+    const others = [];
+    for(let i=2;i<=headcount();i++){ const el = f.elements["p"+i]; if(el.value.trim().length < 2) return fail(el, "请填写第"+(NTH[i]||i)+"位学员的姓名。"); others.push(el.value.trim()); }
     const file = slip.files[0];
     if(!file) return fail(slip, "请上传银行转账单。");
 
@@ -333,7 +345,7 @@ const MAX_BYTES = 8 * 1024 * 1024;
     const d = {
       name:v("name"), company:v("company"), phone, industry:v("industry"), email:v("email"),
       courses, courseText:courses.join(" + "), dateText:dates.join("；"),
-      pax: chosen.map(c=>c.name+" "+paxOf(c)+" 人").join("；"), name2: needName2() ? v("name2") : "",
+      pax: chosen.map(c=>c.name+" "+paxOf(c)+" 人").join("；"), others,
       amount: amount(), note:v("note"), website:v("website")
     };
 
