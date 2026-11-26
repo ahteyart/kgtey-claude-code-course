@@ -74,6 +74,11 @@ input:focus-visible,select:focus-visible,textarea:focus-visible{outline:2px soli
 
 #others{margin-top:4px}
 #others .who{margin-top:18px;color:var(--muted);font-size:14px}
+.person{margin-top:14px;padding:4px 16px 16px;border:1px solid var(--line-hi);border-radius:10px;background:var(--void)}
+.person h3{margin-top:12px;font:700 16px/1.4 var(--sans)}
+.person label{margin-top:12px}
+.same{display:flex!important;align-items:center;gap:8px;font-weight:500!important;cursor:pointer}
+.same input{width:20px;height:20px;accent-color:var(--accent);flex:none}
 .total{display:flex;justify-content:space-between;align-items:baseline;gap:12px;margin-top:20px;padding-top:16px;border-top:1px dashed var(--line-hi)}
 .total b{font:700 26px/1 var(--sans);color:var(--accent)}
 
@@ -148,7 +153,7 @@ footer{margin-top:56px;padding:28px 0 40px;border-top:1px solid var(--line);colo
 
       <div id="courses"></div>
       <div id="others" hidden>
-        <p class="who">第 1 位学员就是上面填的联系人。请填写其他学员的姓名：</p>
+        <p class="who">第 1 位学员就是上面填的联系人。请填写其他学员的资料（开 invoice 用）：</p>
         <div id="other-fields"></div>
       </div>
 
@@ -235,10 +240,18 @@ const MAX_BYTES = 8 * 1024 * 1024;
   const kept = {};
   function drawOthers(){
     const n = headcount(), box = $("other-fields");
-    box.querySelectorAll("input").forEach(i=>kept[i.name]=i.value);
+    if(box.dataset.n === String(n)){ $("others").hidden = n < 2; return; }
+    box.querySelectorAll("input").forEach(i=>kept[i.name] = i.type==="checkbox" ? i.checked : i.value);
     let h = "";
-    for(let i=2;i<=n;i++) h += '<label for="f-p'+i+'">第'+(NTH[i]||i)+'位学员姓名</label><input id="f-p'+i+'" name="p'+i+'" type="text" maxlength="60" autocomplete="off" value="'+esc(kept["p"+i]||"")+'">';
-    if(box.dataset.n !== String(n)){ box.innerHTML = h; box.dataset.n = n; }
+    for(let i=2;i<=n;i++){
+      const same = kept["s"+i] !== false;
+      h += '<div class="person"><h3>第'+(NTH[i]||i)+'位学员</h3>'+
+        '<div class="grid2"><div><label for="f-p'+i+'">姓名</label><input id="f-p'+i+'" name="p'+i+'" type="text" maxlength="60" autocomplete="off" value="'+esc(kept["p"+i]||"")+'"></div>'+
+        '<div><label for="f-t'+i+'">联系号码</label><input id="f-t'+i+'" name="t'+i+'" type="tel" inputmode="tel" maxlength="20" autocomplete="off" placeholder="例如：012-345 6789" value="'+esc(kept["t"+i]||"")+'"></div></div>'+
+        '<label class="same"><input type="checkbox" name="s'+i+'"'+(same?" checked":"")+'>和联系人同一间公司</label>'+
+        '<div class="co"'+(same?" hidden":"")+'><label for="f-c'+i+'">公司名称</label><input id="f-c'+i+'" name="c'+i+'" type="text" maxlength="100" autocomplete="off" value="'+esc(kept["c"+i]||"")+'"></div></div>';
+    }
+    box.innerHTML = h; box.dataset.n = n;
     $("others").hidden = n < 2;
   }
 
@@ -253,6 +266,7 @@ const MAX_BYTES = 8 * 1024 * 1024;
     $("total2").textContent = a ? fmt(a) : "上面的应付金额";
   }
   f.addEventListener("change", e=>{
+    if(/^s\d+$/.test(e.target.name)){ const co = e.target.closest(".person").querySelector(".co"); co.hidden = e.target.checked; if(!co.hidden) co.querySelector("input").focus(); return; }
     const card = e.target.closest(".course"); 
     if(card){
       const c = COURSES.find(x=>x.id===card.dataset.id);
@@ -336,7 +350,15 @@ const MAX_BYTES = 8 * 1024 * 1024;
     if(!chosen.length) return fail(f.querySelector(".course input"), "请至少选择一个课程。");
     for(const c of chosen){ if(!dateOf(c)) return fail(f.querySelector('input[name="date-'+c.id+'"]:not(:disabled)'), "请选择「"+c.name+"」的上课日期。"); }
     const others = [];
-    for(let i=2;i<=headcount();i++){ const el = f.elements["p"+i]; if(el.value.trim().length < 2) return fail(el, "请填写第"+(NTH[i]||i)+"位学员的姓名。"); others.push(el.value.trim()); }
+    const okPhone = t => /^[+\d][\d\s\-()+]*$/.test(t) && t.replace(/\D/g,"").length >= 9 && t.replace(/\D/g,"").length <= 15;
+    for(let i=2;i<=headcount();i++){
+      const nth = "第"+(NTH[i]||i)+"位学员", el = k => f.elements[k+i], val = k => el(k).value.trim();
+      if(val("p").length < 2) return fail(el("p"), "请填写"+nth+"的姓名。");
+      if(!okPhone(val("t"))) return fail(el("t"), "请填写"+nth+"的联系号码，例如 012-345 6789。");
+      const same = el("s").checked;
+      if(!same && val("c").length < 2) return fail(el("c"), "请填写"+nth+"的公司名称。");
+      others.push({ name:val("p"), phone:val("t"), company: same ? v("company") : val("c") });
+    }
     const file = slip.files[0];
     if(!file) return fail(slip, "请上传银行转账单。");
 
