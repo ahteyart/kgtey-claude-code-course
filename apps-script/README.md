@@ -18,6 +18,8 @@
 
 ## 资料存在哪里
 - 资料：Sheet「课程报名 Registration 2026」（Company / Shine on Digital / 课程报名 Registration）
+  - 分页「课程报名 Registration」：一次报名一行，用来核对付款
+  - 分页「学员名单 Attendees」：一位学员一行（姓名、电话、公司），用来开 invoice 和点名
 - 转账单：同一个文件夹里的「Bank Slips 银行转账单」
 - 「处理状态」栏默认是「待核对」，核对付款后可以从下拉选单改。
 

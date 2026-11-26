@@ -4,19 +4,24 @@
 
    每个课程的写法：
    {
-     id:    "英文代号（不要重复，不要改旧的）",
-     name:  "课程名称",
-     note:  "课程名称下面的小字说明",
-     dates: [ "日期 1", "日期 2", ... ],     ← 学员从这里选一个
-     prices: [ { pax: 1, price: 890 }, ... ] ← 人数和「总价」（RM）
+     id:         "英文代号（不要重复，不要改旧的）",
+     name:       "课程名称",
+     note:       "课程名称下面的小字说明",
+     dates:      [ "日期 1", "日期 2", ... ],   ← 学员从这里选一个
+     price:      890,    ← 1 个人的价钱（RM）
+     groupPrice: 750,    ← 2 个人或以上，每人的价钱（RM）
+     maxPax:     20,     ← 一次最多可以报几个人
    }
 
+   价钱怎么算：1 人 = price；2 人以上 = groupPrice × 人数
+   例如 Vibe Coding：1 人 RM890、2 人 RM1,500、3 人 RM2,250、5 人 RM3,750
+   （学员要先选人数，页面才会显示价钱）
+
+   · 没有团体价：groupPrice 写成和 price 一样
    · 加日期：在 dates 里多加一行，例如 "20/1（二）10AM–6PM",
    · 某个日期满了：把那一行改成 { label: "6/12（日）10AM–6PM", full: true },
      （页面会显示「已额满」，学员不能选）
    · 删除日期：把那一行删掉
-   · 人数最多到 prices 里最大的 pax；只有一个价钱时，页面不会显示人数选项
-   · 选 2 人以上，页面会要求填写其他学员的姓名
    · 每一行最后记得加英文逗号 ,
 */
 
@@ -29,12 +34,9 @@ window.COURSES = [
       "6/12（日）10AM–6PM",
       "14/12（一）10AM–6PM",
     ],
-    prices: [
-      { pax: 1, price: 890 },
-      { pax: 2, price: 1500 },
-      { pax: 3, price: 2250 },
-      { pax: 4, price: 3000 },
-    ],
+    price: 890,
+    groupPrice: 750,
+    maxPax: 20,
   },
   {
     id: "agent",
@@ -43,11 +45,8 @@ window.COURSES = [
     dates: [
       "19/12（六）– 20/12（日）10AM–6PM",
     ],
-    prices: [
-      { pax: 1, price: 1800 },
-      { pax: 2, price: 3600 },
-      { pax: 3, price: 5400 },
-      { pax: 4, price: 7200 },
-    ],
+    price: 1800,
+    groupPrice: 1800,
+    maxPax: 20,
   },
 ];
